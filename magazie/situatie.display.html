@@ -1,0 +1,86 @@
+<HTML>
+
+<HEAD>
+    <STYLE>
+        BODY
+        {
+            FONT-FAMILY: 'DOSIS',CALIBRI,ARIAL,SANS-SERIF;
+            FONT-SIZE: 24px;
+            WIDTH: 100%;
+        }
+        DIV
+        {
+            FLOAT: LEFT;
+        }
+        TABLE
+        {
+            WIDTH: 98%;
+            TEXT-ALIGN: CENTER;
+            BORDER: 3px SOLID BLACK;
+            BORDER-COLLAPSE: COLLAPSE;
+        }
+        TH
+        {
+            BORDER: 2px SOLID BLACK;
+            BORDER-BOTTOM: 3px SOLID BLACK;
+            BORDER-COLLAPSE: COLLAPSE;
+            FONT-SIZE: 20px;
+            FONT-WEIGHT: SOLID;
+        }
+        TD
+        {
+            BORDER: 2px SOLID BLACK;
+            BORDER-COLLAPSE: COLLAPSE;
+        }
+    </STYLE>
+</HEAD>
+<BODY>
+    <DIV STYLE = "WIDTH: 100%; MARGIN: 20px AUTO;">
+        <DIV STYLE = "WIDTH: 99%;">
+  		    <IMG SRC = "logo.jpg" STYLE = "WIDTH: 200px; HEIGHT:50px; MARGIN-TOP: 15px; MARGIN-RIGHT: 15px; MARGIN-BOTTOM: 15px;">
+  		    <B><CENTER>SITUATIE MAGAZIE <?PHP echo $option; if($clasa != 'GENERALA') echo '<BR><font size = 4>GRUPA '.$clasa.'</font>';?><BR><BR><BR>
+  		    <TABLE>
+  		        <TH WIDTH = 2%>
+  		            Nr.crt.
+  		        </TH>
+  		        <TH WIDTH = 5%>
+  		            Cod SAP
+  		        </TH>
+  		        <TH WIDTH = 20%>
+  		            Denumire Produs
+  		        </TH>
+  		        <TH WIDTH = 3%>
+  		            Cantitate
+  		        </TH>
+  		        <TH WIDTH = 3%>
+  		            U.M.
+  		        </TH>
+  		        <TH WIDTH = 10%>
+  		            Furnizor
+  		        </TH>
+  		        <TH WIDTH = 3%>
+  		            Magazie
+  		        </TH>
+  		        <TH WIDTH = 3%>
+  		            Grupa Material
+  		        </TH>
+  		        <TH WIDTH = 3%>
+  		            Imprumutate
+  		        </TH>
+  		        <TH WIDTH = 3%>
+  		            Remaniere
+  		        </TH>
+  		        <TH>
+  		            Observatii
+  		        </TH><TR>
+  		        <?PHP 
+				    if($option == 'GLOBALA') require 'C:\xampp\htdocs\ramira\magazie\Magazie\situatie.magazie.global.php';
+					else if($option == 'A') require 'C:\xampp\htdocs\ramira\magazie\Magazie\situatie.magazie.a.php';
+					else if($option == 'S') require 'C:\xampp\htdocs\ramira\magazie\Magazie\situatie.magazie.s.php';
+				?>
+  		    </TABLE>
+        </DIV>
+    </DIV>
+</BODY>
+
+</HTML>

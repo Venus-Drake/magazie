@@ -1,0 +1,1 @@
+<CENTER><img src="warehouse.jpg" alt="Starting the day" style=" WIDTH:80%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>

@@ -1,0 +1,269 @@
+<!--<TR STYLE = "BORDER: 1PX SOLID BLACK;"><TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">1. Ati lucrat in trecut cu programul <B>Lighthouse21</B>?</TD>
+			<TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q1_SELECT" STYLE = "WIDTH: 10vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q1_FUNCTION();">
+			                                  <OPTION></OPTION>
+											  <OPTION VALUE = "Q1_SEL1">DA</OPTION>
+											  <OPTION VALUE = "Q1_SEL2">NU</OPTION></SELECT></TD>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------!>
+			<TR ID = "Q1S1" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+			    <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">2. Lucrati si in prezent cu acest program?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q1S1_SELECT" STYLE = "WIDTH: 10vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q1S_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q1S1_SEL1">DA</OPTION>
+																<OPTION VALUE = "Q1S1_SEL2">NU</OPTION></SELECT></TD>
+			<TR ID = "Q1S2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+			    <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">2. In prezent lucrati cu acest program?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q1S2_SELECT" STYLE = "WIDTH: 10vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q1S_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q1S2_SEL1">DA</OPTION>
+																<OPTION VALUE = "Q1S2_SEL2">NU</OPTION></SELECT></TD>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------!>	
+			<TR ID = "Q2S1Q1" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">3. Cat de des lucrati cu acest program?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q2S1Q1_SELECT" STYLE = "WIDTH: 10vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q2S1Q1_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q2S1Q1_SEL1">In fiecare zi</OPTION>
+																<OPTION VALUE = "Q2S1Q1_SEL2">Saptamanal</OPTION>
+																<OPTION VALUE = "Q2S1Q1_SEL3">Lunar</OPTION>
+																<OPTION VALUE = "Q2S1Q1_SEL4">Ocazional</OPTION>
+																<OPTION VALUE = "Q2S1Q1_SEL5">Foarte rar</OPTION></SELECT></TD>
+			<TR ID = "Q2S2Q1" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">3. De ce nu lucrati cu acest program?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q2S2Q1_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q2S2Q1_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q2S2Q1_SEL1">Postul meu nu implica lucrul cu el</OPTION>
+																<OPTION VALUE = "Q2S2Q1_SEL2">Nu pot accesa programul</OPTION>
+																<OPTION VALUE = "Q2S2Q1_SEL3">Nu am fost instruit/a sa lucrez cu acest program</OPTION>
+																<OPTION VALUE = "Q2S2Q1_SEL4">Nu stiu pentru ce este acest program</OPTION>
+																<OPTION VALUE = "Q2S2Q1_SEL5">Alt motiv</OPTION></SELECT></TD>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------!>
+			<TR ID = "Q3S1Q2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">4. Intampinati dificultati in a lucra cu Lighthouse21?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q3S1Q2_SELECT" STYLE = "WIDTH: 10vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q3S1Q2_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q3S1Q2_SEL1">Niciodata</OPTION>
+																<OPTION VALUE = "Q3S1Q2_SEL2">Uneori</OPTION>
+																<OPTION VALUE = "Q3S1Q2_SEL3">Deseori</OPTION></SELECT></TD>
+			<TR ID = "Q3S2Q2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">4. Care ar fi motivul pentru care lucrati atat de rar cu el?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q3S2Q2_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q3S2Q2_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q3S2Q2_SEL1">Specific activitatii pe care o prestez in companie</OPTION>
+																<OPTION VALUE = "Q3S2Q2_SEL2">Am probleme cu accesarea programului</OPTION>
+																<OPTION VALUE = "Q3S2Q2_SEL3">Am probleme cu calculatorul pe care lucrez</OPTION>
+																<OPTION VALUE = "Q3S2Q2_SEL4">Consider ca nu ma ajuta in desfasurarea activitatii</OPTION>
+																<OPTION VALUE = "Q3S2Q2_SEL5">Altele</OPTION></SELECT></TD>
+<!--Postul meu nu implica lucrul cu el--!>
+			<TR ID = "Q3S3Q2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">4. Sunteti inregistrat in baza de date ca utilizator S.A.P.; oare nu exista nici o situatie in care ati avea nevoie de niste rapoarte pe care acel program nu vi le furnizeaza asa cum ati avea nevoie?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q3S3Q2_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q3S3Q2_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q3S3Q2_SEL1">Niciodata</OPTION>
+																<OPTION VALUE = "Q3S3Q2_SEL2">Uneori</OPTION>
+																<OPTION VALUE = "Q3S3Q2_SEL3">Deseori</OPTION></SELECT></TD>
+<!--Nu pot accesa programul--!>
+			<TR ID = "Q3S4Q2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">4. Ce anume va impiedica sa o faceti?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q3S4Q2_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q3S4Q2_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q3S4Q2_SEL1">Programul nu este instalat pe calculatorul meu</OPTION>
+																<OPTION VALUE = "Q3S4Q2_SEL2">Nu ma pot loga in program</OPTION>
+																<OPTION VALUE = "Q3S4Q2_SEL3">Programul nu porneste</OPTION></SELECT></TD>
+<!--Nu am fost instruit/a sa lucrez cu acest program--!>
+			<TR ID = "Q3S5Q2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">4. Aveti nevoie de indrumare in utilizarea programului?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q3S5Q2_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q3S5Q2_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q3S5Q2_SEL1">Da, am nevoie de indrumare</OPTION>
+																<OPTION VALUE = "Q3S5Q2_SEL2">Nu, nu mi s-a specificat ca trebuie sa lucrez cu el</OPTION></SELECT></TD>
+<!--Nu stiu pentru ce este acest program--!>
+			<TR ID = "Q3S6Q2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">4. Ne pare rau sa auzim asta!<BR>Ne-ar face placere sa va consiliem in legatura cu programul.<BR>Cand considerati ca ati avea timp sa ne intalnim si sa discutam putin?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q3S6Q2_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q3S6Q2_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q3S6Q2_SEL1">As dori sa fiu contactat/a pentru o intalnire</OPTION>
+																<OPTION VALUE = "Q3S6Q2_SEL2">Va contactez eu</OPTION>
+																<OPTION VALUE = "Q3S6Q2_SEL3">Stau foarte prost cu timpul</OPTION></SELECT></TD>
+<!--Alt motiv--!>
+			<TR ID = "Q3S7Q2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">4. Am fi foarte recunoscatori daca ati impartasi cu noi acest motiv!<BR>Va rugam, completati in casuta alaturata motivul dumneavoastra!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><TEXTAREA ID = "Q3S7Q2_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw; HEIGHT: 10VH; RESIZE: NONE;"></TEXTAREA>
+                                                                <BUTTON ONCLICK = "Q3S7Q2_FUNCTION();" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;">Trimite</BUTTON></TD>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------!>
+            <TR ID = "Q4S1Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Ne bucuram sa stim asta!<BR>Considerati ca ar trebui aduse imbunatatiri la program sau la rapoarte</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S1Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S1Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S1Q3_SEL1">As imbunatati programul</OPTION>
+																<OPTION VALUE = "Q4S1Q3_SEL2">As imbunatati rapoartele</OPTION>
+																<OPTION VALUE = "Q4S1Q3_SEL3">Nu, consider ca totul este bine</OPTION></SELECT></TD>
+            <TR ID = "Q4S2Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Ce fel de probleme aveti?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S2Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S2Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S2Q3_SEL1">Programul da multiple erori</OPTION>
+																<OPTION VALUE = "Q4S2Q3_SEL2">Programul "ingheata" si trebuie sa il inchid fortat</OPTION>
+																<OPTION VALUE = "Q4S2Q3_SEL3">Programul uneori nu porneste</OPTION>
+																<OPTION VALUE = "Q4S2Q3_SEL4">Calculatorul "ingheata" si nu mai pot lucra</OPTION></SELECT></TD>
+            <TR ID = "Q4S3Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Am inteles!<BR> Intampinati dificultati in operarea programului <B>Lighthouse21</B>?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S3Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S3Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S3Q3_SEL1">Niciodata</OPTION>
+																<OPTION VALUE = "Q4S3Q3_SEL2">Uneori</OPTION>
+																<OPTION VALUE = "Q4S3Q3_SEL3">Deseori</OPTION></SELECT></TD>
+            <TR ID = "Q4S4Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Ce fel de probleme?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S4Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S4Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S4Q3_SEL1">Programul da multiple erori</OPTION>
+																<OPTION VALUE = "Q4S4Q3_SEL2">Programul "ingheata" si trebuie sa il inchid fortat</OPTION>
+																<OPTION VALUE = "Q4S4Q3_SEL3">Programul uneori nu porneste</OPTION>
+																<OPTION VALUE = "Q4S4Q3_SEL4">Calculatorul "ingheata" si nu mai pot lucra</OPTION></SELECT></TD>
+            <TR ID = "Q4S5Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Ce fel de probleme prezinta calculatorul?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S5Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S5Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S5Q3_SEL1">Da multiple erori</OPTION>
+																<OPTION VALUE = "Q4S5Q3_SEL2">Se restarteaza sau se inchide subit</OPTION>
+																<OPTION VALUE = "Q4S5Q3_SEL3">Incarca foarte greu programele</OPTION>
+																<OPTION VALUE = "Q4S5Q3_SEL4">Se blocheaza si nu il mai pot opera, necesitand restart</OPTION></SELECT></TD>
+            <TR ID = "Q4S6Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Poate ar fi o idee buna sa urmariti sectiunea <B>Ziarul de dimineata</B>!<BR>Nu se stie niciodata ce idei puteti gasi acolo!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S6Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S6Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S6Q3_SEL1">OK!</OPTION>
+																<OPTION VALUE = "Q4S6Q3_SEL2">Voi incerca</OPTION>
+																<OPTION VALUE = "Q4S6Q3_SEL3">Daca nu uit...</OPTION>
+																<OPTION VALUE = "Q4S6Q3_SEL4">Nu am timp pentru asta</OPTION></SELECT></TD>
+            <TR ID = "Q4S7Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Am fi foarte recunoscatori daca ati impartasi cu noi acest motiv!<BR>Va rugam, completati in casuta alaturata motivul dumneavoastra!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><TEXTAREA ID = "Q4S7Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw; HEIGHT: 10VH; RESIZE: NONE;"></TEXTAREA>
+                                                                <BUTTON ONCLICK = "Q4S7Q3_FUNCTION();" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;">Trimite</BUTTON></TD>
+            <TR ID = "Q4S8Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Ne bucuram sa stim asta!<BR>Totusi, poate ar fi o idee buna sa urmariti sectiunea <B>Ziarul de dimineata</B>!<BR>Nu se stie niciodata ce idei puteti gasi acolo!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S8Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S8Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S8Q3_SEL1">OK!</OPTION>
+																<OPTION VALUE = "Q4S8Q3_SEL2">Voi incerca</OPTION>
+																<OPTION VALUE = "Q4S8Q3_SEL3">Daca nu uit...</OPTION>
+																<OPTION VALUE = "Q4S8Q3_SEL4">Nu am timp pentru asta</OPTION></SELECT></TD>
+            <TR ID = "Q4S9Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Daca doriti consiliere in aceasta directie, noi suntem aici pentru a va ajuta!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S9Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S9Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S9Q3_SEL1">Cred ca ar prinde bine!</OPTION>
+																<OPTION VALUE = "Q4S9Q3_SEL2">Nu, prefer sa ma descurc sungur/a!</OPTION></SELECT></TD>
+            <TR ID = "Q4S10Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Ne pare rau sa auzim asta!<BR>Doriti sa contactam departamentul IT pentru a solutiona aceasta situatie?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S10Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S10Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S10Q3_SEL1">Absolut!</OPTION>
+																<OPTION VALUE = "Q4S10Q3_SEL2">Nu, pot sa o fac si eu!</OPTION>
+																<OPTION VALUE = "Q4S10Q3_SEL3">Nu, nu vreau acest program!</OPTION></SELECT></TD>
+            <TR ID = "Q4S11Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Asta nu e bine! Vom studia situatia si vom reveni cu o solutie!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S11Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S11Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S11Q3_SEL1">Multumesc!</OPTION>
+																<OPTION VALUE = "Q4S11Q3_SEL2">Nu, nu vreau acest program!</OPTION></SELECT></TD>
+            <TR ID = "Q4S12Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+            
+
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Suntem aici pentru dumneavoastra!<BR>In scurt timp va vom contacta pentru a stabili o intalnire.</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S12Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S12Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S12Q3_SEL1">Multumesc!</OPTION>
+																<OPTION VALUE = "Q4S12Q3_SEL2">Va contactez eu cand am timp!</OPTION></SELECT></TD>
+            <TR ID = "Q4S13Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+            
+
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. In principiu, unde este nevoie de statistici sau raportare, va fi necesara introducerea operarii in <B>Lighthouse21</b><BR>Doriti sa stiti mai multe?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S13Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S13Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S13Q3_SEL1">Da, vreau sa aflu mai mult!</OPTION>
+																<OPTION VALUE = "Q4S13Q3_SEL2">Nu, activitatea mea nu implica astfel de operatiuni!</OPTION>
+																<OPTION VALUE = "Q4S13Q3_SEL3">Nu, subiectul nu ma intereseaza!</OPTION></SELECT></TD>
+																
+																
+
+            <TR ID = "Q4S14Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Dorim sa va aducem la cunostinta faptul ca raspunsurile dumneavoastra la aceste intrebari sunt strict confidentiale si nu vor fi expuse public in nici o locatie din incinta sau din afara companiei.<BR>Veti fi contactat/a in curand, prin email sau la telefon, pentru a stabili data intalnirii cu reprezentattul nostru.</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><BUTTON ID = "Q4S14Q3_SELECT" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;" ONCLICK = "END_FUNCTION();">Am inteles!</BUTTON></TD>
+            <TR ID = "Q4S15Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Dorim sa va aducem la cunostinta faptul ca raspunsurile dumneavoastra la aceste intrebari sunt strict confidentiale si nu vor fi expuse public in nici o locatie din incinta sau din afara companiei.<BR>Asteptam email-ul sau telefonul dumneavoastra, pentru a stabili data intalnirii cu reprezentantul nostru!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><BUTTON ID = "Q4S15Q3_SELECT" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;" ONCLICK = "END_FUNCTION();">Am inteles!</BUTTON></TD>
+            <TR ID = "Q4S16Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Dorim sa va aducem la cunostinta faptul ca aceasta intrevedere poate avea influente pozitive asupra activitatii dumneavoastra;<BR>poate ar fi o idee buna sa va faceti putin timp sa schimbam cateva cuvinte...</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S16Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S16Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S16Q3_SEL1">Voi face tot posibilul</OPTION>
+																<OPTION VALUE = "Q4S16Q3_SEL2">Nu promit nimic</OPTION>
+																<OPTION VALUE = "Q4S16Q3_SEL3">Nu, subiectul nu ma intereseaza!</OPTION></SELECT></TD>
+            <TR ID = "Q4S17Q3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Dorim sa va aducem la cunostinta faptul ca raspunsurile dumneavoastra la aceste intrebari sunt strict confidentiale si nu vor fi expuse public in nici o locatie din incinta sau din afara companiei.<BR>Vom studia raspunsul dumneavoastra si vom reveni!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><BUTTON ID = "Q4S17Q3_SELECT" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;" ONCLICK = "END_FUNCTION();">Multumesc!</BUTTON></TD>
+			    
+
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------!>
+            <TR ID = "Q5S1Q4" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">6. Ce anume ati schimba / imbunatati la program?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><TEXTAREA ID = "Q5S1Q4_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw; HEIGHT: 10VH; RESIZE: NONE;"></TEXTAREA>
+                                                                <BUTTON ONCLICK = "Q5S1Q4_FUNCTION();" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;">Trimite</BUTTON></TD>
+            <TR ID = "Q5S2Q4" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">6. Ce anume ati schimba / imbunatati la rapoarte si la care anume?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><TEXTAREA ID = "Q5S2Q4_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw; HEIGHT: 10VH; RESIZE: NONE;"></TEXTAREA>
+                                                                <BUTTON ONCLICK = "Q5S2Q4_FUNCTION();" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;">Trimite</BUTTON></TD>
+                                                                
+                                                                
+
+            <TR ID = "Q5S3Q4" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">6. Ne bucuram sa stim ca sunteti multumiti de acest produs!<BR>Dorim sa va aducem la cunostinta faptul ca raspunsurile dumneavoastra la aceste intrebari sunt strict confidentiale si nu vor fi expuse public in nici o locatie din incinta sau din afara companiei.<BR>Daca aveti vreodata nevoie de consiliere sau suport din partea noastra, nu ezitati sa ne contactati!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><BUTTON ID = "Q5S3Q4_SELECT" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;" ONCLICK = "END_FUNCTION();">Multumesc!</BUTTON></TD>
+            <TR ID = "Q5S4Q4" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">6. Va rugam sa faceti un screen-shot al erorilor respective si sa le trimiteti la <A HREF = "mailto:warehouse-soft@ramira.ro?subject=Erori Lighthouse21">Reprezentantul Nostru</A>; vom face tot posibilul sa rezolvam situatia cat mai repede cu putinta!</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q4S4Q3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q4S4Q3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q4S4Q3_SEL1">Asa voi face!</OPTION>
+																<OPTION VALUE = "Q4S4Q3_SEL2">Nu promit nimic</OPTION></SELECT></TD>
+																
+
+            <TR ID = "Q5S5Q4" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">6. De obicei, cand programele prezinta acest gen de probleme, este foarte posibil sa avem ca si cauza insusi sistemul de operare sau starea tehnica a calculatorului.<BR>Am sugera contactarea departamentului IT, la tel. 0799014198, dn. Mircea Pop, sau 0728112220, dn. Tara Rares; daca situatia persista, nu ezitati sa ne contactati, pe email, sau la telefon<br>Dorim sa va aducem la cunostinta faptul ca raspunsurile dumneavoastra la aceste intrebari sunt strict confidentiale si nu vor fi expuse public in nici o locatie din incinta sau din afara companiei.</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><BUTTON ID = "Q5S5Q4_SELECT" STYLE = "WIDTH: 4.5VW; HEIGHT: 2.5VH; FLOAT: NONE; FONT-WEIGHT: BOLD; MARGIN-LEFT: 1.5VW; MARGIN-BOTTOM: 1VH;" ONCLICK = "END_FUNCTION();">Multumesc!</BUTTON></TD>
+			    
+
+            <TR ID = "Q5S6Q4" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">6. Ne bucuram sa stim asta!<BR>Considerati ca ar trebui aduse imbunatatiri la program sau la rapoarte</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q5S6Q4_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q5S6Q4_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q5S6Q4_SEL1">As imbunatati programul</OPTION>
+																<OPTION VALUE = "Q5S6Q4_SEL2">As imbunatati rapoartele</OPTION>
+																<OPTION VALUE = "Q5S6Q4_SEL3">Nu, consider ca totul este bine</OPTION></SELECT></TD>
+            <TR ID = "Q5S7Q4" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">6. Ce fel de probleme aveti?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "Q5S7Q4_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "Q5S7Q4_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "Q5S7Q4_SEL1">Programul da multiple erori</OPTION>
+																<OPTION VALUE = "Q5S7Q4_SEL2">Programul "ingheata" si trebuie sa il inchid fortat</OPTION>
+																<OPTION VALUE = "Q5S7Q4_SEL3">Programul uneori nu porneste</OPTION>
+																<OPTION VALUE = "Q5S7Q4_SEL4">Calculatorul "ingheata" si nu mai pot lucra</OPTION></SELECT></TD>
+																
+
+
+            <TR ID = "RAO1" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Considerati ca activitatea dumneavoastra necesita licenta permanenta, sau vi s-ar putea trimite rapoartele saptamanal sau lunar, pe mail?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "RAO1_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "RAO1_SELECT_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "license">Licenta permanenta</OPTION>
+																<OPTION VALUE = "mailreports">Raportare prin email</OPTION></SELECT></TD>
+			<TR ID = "OAO2" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+			<TR ID = "OAO3" STYLE = "VISIBILITY: COLLAPSE; BORDER-TOP: 1PX SOLID BLACK; WIDTH: 100%;">
+                <TD STYLE = "WIDTH: 50%; TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;">5. Considerati ca ar trebui aduse imbunatatiri la program sau la rapoarte?</TD>
+			    <TD STYLE = "TEXT-ALIGN: LEFT; FONT-SIZE: 1vw;"><SELECT ID = "OAO3_SELECT" STYLE = "WIDTH: 20vw; MARGIN-LEFT: 2vw;" ONCHANGE = "OAO3_FUNCTION();">
+                                                                <OPTION></OPTION>
+																<OPTION VALUE = "OAO3_SEL1">Programul se inchide pe neasteptate</OPTION>
+																<OPTION VALUE = "OAO3_SEL2">Programul "ingheata" si trebuie inchis fortat</OPTION>
+																<OPTION VALUE = "OAO3_SEL3">Unele rapoarte nu sunt corecte</OPTION>
+																<OPTION VALUE = "OAO3_SEL4">Programul se misca foarte greu</OPTION>
+																<OPTION VALUE = "OAO3_SEL5">Calculatorul se misca foarte greu</OPTION>
+																<OPTION VALUE = "OAO3_SEL6">Programul da erori repetate</OPTION></SELECT></TD>--!>

@@ -1,0 +1,60 @@
+<!
+* MENIUL PRINCIPAL, CARE APARE DUPA LOGARE.
+* DE AICI, PRACTIC, INTRAM IN ADEVARATA ACTIVITATE
+* EFECTUAM INCLUSIV O RAPIDA VERIFICARE A DATELOR UTILIZATORULUI SI PERSONALIZARE A PAGINILOR, EXTRAGAND SEXUL UTILIZATORULUI SI NUMELE
+>
+<HTML>
+    <HEAD>
+    
+	    <link rel="stylesheet" href="\ramira\magazie\styles.css">
+	    <SCRIPT src="/ramira/magazie/main.script.js"></SCRIPT>
+
+	</HEAD>
+
+	<BODY ONLOAD = "display_ct()" STYLE = "BACKGROUND-COLOR: RGB(255,255,255)">
+		<NAV>
+		    <DIV STYLE = "background-color:RGBA(255,255,255);  WIDTH: 46%; HEIGHT: 4VW; MARGIN-TOP: .25VW; MARGIN-LEFT: .25VW; FLOAT: LEFT; BORDER-RIGHT: 1px SOLID GRAY; BORDER-RADIUS: 15px;">
+			    <button CLASS = "eliberareprod" ID = "eliberareprod" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/eliberare%20produs/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Eliberare Produs</button>
+				<button CLASS = "imprumutprod" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/imprumuturi/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Imprumut Produs</button>
+				<button CLASS = "stornoprod" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/storno/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Returnare Produs</button>
+				<button CLASS = "receptie" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/receptie%20marfa/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Receptie Marfa</button>
+				<button CLASS = "rapoarte" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/rapoarte/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Rapoarte</button>
+		 		<button CLASS = "status" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/magazie/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Status Magazie</button>
+		  		<button CLASS = "comenzi" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/comenzi/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Comenzi</button>
+		   		<button CLASS = "extras" STYLE = "MARGIN-LEFT: .23VW;" onclick = "location.href='/ramira/magazie/extras/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self"><B>Extras</button>
+		    </DIV>
+			<DIV STYLE = "WIDTH: 43%; HEIGHT: 4VW; MARGIN-TOP: .25VW; BACKGROUND-COLOR: RGBA(255,255,255); COLOR: RGBA(237,28,36); FLOAT: LEFT; TEXT-ALIGN: CENTER; BORDER-LEFT: 1px SOLID GRAY; BORDER-RIGHT: 1px SOLID GRAY; BORDER-RADIUS: 15px; FONT-SIZE: 1.4vw;">
+   		    <DIV STYLE = "COLOR: RGBA(237,28,36); FLOAT: LEFT; TEXT-ALIGN: CENTER; MARGIN-TOP: .25VW; WIDTH: 85%">
+   		        <b>Bine ai venit,<BR> <?php if($nume)echo $nume; else echo 'Unknown user'; ?>!
+   		    </DIV>
+   		    <DIV>
+   		        <IMG SRC = "/ramira/magazie/images/<?php if($nume)
+                                                           {
+														   	   require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+														       $gengrab = "SELECT `gender` FROM `utilizatori` WHERE `username` = '$user'";
+														       if($genrun = mysql_query($gengrab))
+														       {
+																   if(mysql_num_rows($genrun) > 0)
+																   {
+																   	   $genrow = mysql_fetch_assoc($genrun);
+																   	   $gender = $genrow['gender'];
+																   	   if($gender == 0) echo 'FemaleAvatarIcon.png';
+																   	   else if($gender == 1) echo 'MaleAvatarIcon.png';
+																   	   else echo 'NeuterAvatarIcon.png';
+																   }
+																   else echo 'NeuterAvatarIcon.png';
+											   	  		       }
+														       else
+															   {
+														           $mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+																   require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+															   }
+										                   }?>" STYLE = "HEIGHT: 3.5vw; WIDTH: 3.5vw; FLOAT: LEFT;MARGIN-TOP: .25vw; CURSOR: POINTER;" TITLE = "CONTUL MEU" ONCLICK = "location.href='/ramira/magazie/users%20accounts/myaccount.php?nume=<?php echo $nume.'&userid='.$user; ?>'" target = "_self">
+   		    </DIV>
+   		</DIV>
+			<DIV STYLE = "WIDTH: 10%; HEIGHT: 4VW; MARGIN-TOP: .25VW; BACKGROUND-COLOR:RGBA(255,255,255); COLOR: RGBA(237,28,36); TEXT-ALIGN: CENTER; FLOAT: LEFT; BORDER-LEFT: 1px SOLID GRAY; BORDER-RADIUS: 15px; FONT-SIZE: 1vw;" ID = "todayNow"><?php echo '<BR><b>'.$date.'<br>'.$hour;?>
+			</DIV>
+		</NAV>
+		<BR><BR><BR>
+	</BODY>
+</HTML>
