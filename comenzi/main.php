@@ -35,32 +35,28 @@
 	    <?php
 		
 		    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-		    $stocCHK = "SELECT * FROM `magazie_stoc` WHERE `cantitate` <= `cantitate.minima` AND `alarma` = '1'";
-		    if($stocCHKrun = mysql_query($stocCHK))
-		    {
-			    if(mysql_num_rows($stocCHKrun) > 0)
-			    {
-					$stocALARM = TRUE;
-				    echo '<DIV ID = "headTEXT" STYLE = "WIDTH: 100%; HEIGHT: 5vw;"><CENTER>S-au detectat produse cu stoc zero sau la limita!</CENTER><BR></DIV>
-					<DIV ID = "alarmsON" STYLE = "DISPLAY: BLOCK;">';
-					require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmson.buttons.php';
-					echo'<DIV ID = "alarmsOFF" STYLE = "DISPLAY: NONE;">';
-					require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmsoff.buttons.php';
-			    }
-			    else
-				{
-					$stocALARM = FALSE;
-					echo '<DIV ID = "headTEXT" STYLE = "WIDTH: 100%; HEIGHT: 5vw;"><CENTER>Nu s-au gasit alerte de stoc active in magazie</CENTER><BR></DIV>
-					<DIV ID = "alarmsON" STYLE = "DISPLAY: NONE;">';
-	    			require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmson.buttons.php';
-					echo '<DIV ID = "alarmsOFF" STYLE = "DISPLAY: BLOCK;">';
-					require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmsoff.buttons.php';
-				}
-		    }
-		    else
+		    if(!$stocCHK = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `cantitate` <= `cantitate.minima` AND `alarma` = '1'"))
 			{
-				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+			}
+		    if(mysqli_num_rows($stocCHK) > 0)
+			{
+				$stocALARM = TRUE;
+				echo '<DIV ID = "headTEXT" STYLE = "WIDTH: 100%; HEIGHT: 5vw;"><CENTER>S-au detectat produse cu stoc zero sau la limita!</CENTER><BR></DIV>
+				<DIV ID = "alarmsON" STYLE = "DISPLAY: BLOCK;">';
+				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmson.buttons.php';
+				echo'<DIV ID = "alarmsOFF" STYLE = "DISPLAY: NONE;">';
+				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmsoff.buttons.php';
+			}
+			else
+			{
+				$stocALARM = FALSE;
+				echo '<DIV ID = "headTEXT" STYLE = "WIDTH: 100%; HEIGHT: 5vw;"><CENTER>Nu s-au gasit alerte de stoc active in magazie</CENTER><BR></DIV>
+				<DIV ID = "alarmsON" STYLE = "DISPLAY: NONE;">';
+				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmson.buttons.php';
+				echo '<DIV ID = "alarmsOFF" STYLE = "DISPLAY: BLOCK;">';
+				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/alarmsoff.buttons.php';
 			}
 
 		?>

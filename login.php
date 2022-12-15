@@ -84,28 +84,25 @@
   			{
 				$pass = $_GET['pass'];
                 require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-	 			$que = "SELECT * FROM `utilizatori` WHERE `username` = '$user' AND `password` = '$pass'";
-	 			if($run = mysql_query($que))
+	 			if($que = $connect -> query("SELECT * FROM `utilizatori` WHERE `username` = '$user' AND `password` = '$pass'"))
 	 			{
-				    if(mysql_num_rows($run) != 0)
+				    if(mysqli_num_rows($que) != 0)
 					{
-						$row = mysql_fetch_assoc($run);
+						$row = mysqli_fetch_assoc($que);
 						$nume = $row['nume'].' '.$row['prenume'];
 						$IP = $row['IP.connect'];
 						$iplog = $_SERVER['REMOTE_ADDR'];
 						$loginTIME = date('Y-m-d h:i:s',time());
-		    			$upque = "UPDATE `utilizatori` SET `IP.connect` = '$iplog', `lastLOGIN` = '$loginTIME' WHERE `username` = '$user'";
-					    if($runup = mysql_query($upque))
+		    			if(!$upque = $connect -> query("UPDATE `utilizatori` SET `IP.connect` = '$iplog', `lastLOGIN` = '$loginTIME' WHERE `username` = '$user'"))
 						{
-						    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';
-						    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/quick.stocks.php';
-						    echo '<IFRAME src="/ramira/magazie/images/main.menu.image.php" STYLE = "WIDTH: 100%; HEIGHT: 70%; MARGIN: 0 AUTO; MARGIN-TOP: 10VH; FLOAT: NONE; BORDER-RADIUS: 20px; BORDER: 2px SOLID #999; OVERFLOW: CLIP; BACKGROUND-COLOR: RGBA(0,73,123)"></IFRAME>';
-                        }
-         				else
-	                    {
-						    $mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+						    $mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 							require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+							die();
                         }
+						require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';
+						require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/quick.stocks.php';
+						echo '<IFRAME src="/ramira/magazie/images/main.menu.image.php" STYLE = "WIDTH: 100%; HEIGHT: 70%; MARGIN: 0 AUTO; MARGIN-TOP: 10VH; FLOAT: NONE; BORDER-RADIUS: 20px; BORDER: 2px SOLID #999; OVERFLOW: CLIP; BACKGROUND-COLOR: RGBA(0,73,123)"></IFRAME>';
+	                    
 					}
 					else
 					{
@@ -131,7 +128,7 @@
 				}
 				else
 		        {
-				    $mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+				    $mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 					require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
                 }
 	        }
@@ -155,6 +152,7 @@
 		        </FORM>
 		    </DIV>';
     ?>
+	<DIV STYLE = "POSITION: FIXED; BOTTOM: 0; HEIGHT: 3VH; background-color: red; width: 100%;"> Programul este in reconstructie! Se trece structura de la MYSQL la MYSQLI.</DIV>
 
 
 
@@ -231,7 +229,7 @@
 							    document.getElementById('userBox').focus();
 								document.getElementById('userBox').select();
 						    }
-						    else alert(userchk.responseText);
+						    else console.log(userchk.responseText);
 						}
 				    }
 				}

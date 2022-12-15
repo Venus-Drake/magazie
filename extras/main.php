@@ -78,6 +78,7 @@
     </STYLE>
     <SCRIPT src="/ramira/magazie/main.script.js"></SCRIPT>
     <?php
+    global $nume;
     if(isset($_GET['nume']) && !empty($_GET['nume']))
 	{
 		$nume = $_GET['nume'];

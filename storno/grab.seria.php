@@ -4,59 +4,53 @@ global $endMaxDate;
 
 if($endMaxDate == 0) $endMaxDate = $endDate;
 
+$marca = (string) $marca;
+
 require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-$serialGrab = "SELECT `nr.crt`, `serial.nr` FROM `declaratie_storno` WHERE `marca` = '$marca' AND `processed` = '0'";
-if($runGrab = mysql_query($serialGrab))
+if(!$serialGrab = $connect -> query("SELECT `nr.crt`, `serial.nr` FROM `declaratie_storno` WHERE `marca` = '$marca' AND `processed` = '0'"))
 {
-    if(mysql_num_rows($runGrab) > 0)
-    {
-	    $rowGrab = mysql_fetch_assoc($runGrab);
-	    if($rowGrab['serial.nr'] != '0') 
-		{
-			$seria = $rowGrab['serial.nr'];
-			$serialUp = "UPDATE `declaratie_storno` SET `serial.nr` = '$seria', `gestionar` = '$nume' WHERE `marca` = '$marca' AND `processed` = '0'";
-			if($runUp = mysql_query($serialUp)){}
-            else
-			{
-				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
-			}
-		}
-	    else 
-		{
-			$nrMake = $rowGrab['nr.crt'];
-   			$seria = 'RAM-WS/'.$nrMake.'/'.date('dmyhi',strtotime($datetime));
-  	   		$serialUp = "UPDATE `declaratie_storno` SET `serial.nr` = '$seria', `gestionar` = '$nume' WHERE `marca` = '$marca' AND `processed` = '0'";
-			if($runUp = mysql_query($serialUp)){}
-            else
-			{
-				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
-			}
-		}
-    }
-    else 
+	$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+	require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+	mysqli_close($connect);
+}
+if(mysqli_num_rows($serialGrab) > 0)
+{
+	$rowGrab = $serialGrab -> fetch_assoc();
+	if($rowGrab['serial.nr'] != '0') 
 	{
-		$serialMake = "SELECT `nr.crt` FROM `declaratie_storno` ORDER BY `nr.crt` DESC";
-		if($runMake = mysql_query($serialMake))
+		$seria = $rowGrab['serial.nr'];
+		if(!$serialUp = $connect -> query("UPDATE `declaratie_storno` SET `serial.nr` = '$seria', `gestionar` = '$nume' WHERE `marca` = '$marca' AND `processed` = '0'"))
 		{
-			$rowMake = mysql_fetch_assoc($runMake);
-			$nrMake = $rowMake['nr.crt'];
-			$nrMake++;
-		    $seria = 'RAM-WS/'.$nrMake.'/'.date('dmyhi',strtotime($datetime));
-		    $endMaxDate = $endDate;
+			$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+			require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+			mysqli_close($connect);		
 		}
-   		else
+	}
+	else 
+	{
+		$nrMake = $rowGrab['nr.crt'];
+		$seria = 'RAM-WS/'.$nrMake.'/'.date('dmyhi',strtotime($datetime));
+		if(!$serialUp = $connect -> query("UPDATE `declaratie_storno` SET `serial.nr` = '$seria', `gestionar` = '$nume' WHERE `marca` = '$marca' AND `processed` = '0'"))
 		{
-			$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-			require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+			$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+			require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+			mysqli_close($connect);		
 		}
 	}
 }
-else
+else 
 {
-	$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-	require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+	if(!$serialMake = $connect -> query("SELECT `nr.crt` FROM `declaratie_storno` ORDER BY `nr.crt` DESC"))
+	{
+		$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+		require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+		mysqli_close($connect);		
+	}
+	$rowMake = $serialMake -> fetch_assoc();
+	$nrMake = $rowMake['nr.crt'];
+	$nrMake++;
+	$seria = 'RAM-WS/'.$nrMake.'/'.date('dmyhi',strtotime($datetime));
+	$endMaxDate = $endDate;
 }
 
 ?>

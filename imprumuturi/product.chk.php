@@ -1,5 +1,6 @@
 <?php
 
+if($SAPcode != 0) $SAPcode = (string)$SAPcode;
 require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
 $pchk = "SELECT * FROM `magazie_stoc` WHERE `cod_SAP` LIKE '$SAPcode' ORDER BY `cantitate` DESC";
 if($pchkrun = mysql_query($pchk))

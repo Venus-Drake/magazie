@@ -73,7 +73,14 @@
 
 <BODY>
     <DIV CLASS = "container">
-        <?php require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';?>
+        <?php
+        global $marca;
+        global $product;
+        global $furnizor;
+        global $stornoAmount;
+        global $observatii;
+			require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';
+		?>
 	   <DIV CLASS = "LEFT_BAR"><BR><BR>
 	       <TABLE BORDER = 0 WIDTH = 95% ALIGN = CENTER STYLE = "FONT-SIZE: 1.5vw; FONT-WEIGHT: BOLD;">
 	           <TD STYLE = "TEXT-ALIGN: RIGHT;" WIDTH = 35%>Marca angajat:&nbsp&nbsp&nbsp</TD>

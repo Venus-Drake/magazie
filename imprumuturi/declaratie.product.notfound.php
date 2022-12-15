@@ -1,5 +1,10 @@
 <?php
 
+global $furnizor;
+global $motiv;
+global $product;
+global $observatii;
+
     //VERIFICAM DACA NU MAI AVEM PRODUSUL IN DECLARATIE, CU ALTA DATA/ MOTIV/ OBSERVATII ETC.
     $decPRODchk = "SELECT * FROM `magazie_imprumuturi` WHERE `furnizor` = '$furnizor' AND `sap.code` = '$SAPcode' AND `price` = '$price' ORDER BY `stoc` DESC";
     if($decPRODrun = mysql_query($decPRODchk))

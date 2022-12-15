@@ -35,9 +35,9 @@ echo '
               <TH STYLE = "BORDER: 1px SOLID BLACK; FONT-SIZE: 1.5vw; WIDTH: 5%;">Magazie</TH>
               <TH STYLE = "BORDER: 1px SOLID BLACK; FONT-SIZE: 1.5vw; WIDTH: 5%;">Grupa Mat.</TH>
 		  </THEAD></TR>';
-    if(mysql_num_rows($run) > 0)
+    if(mysqli_num_rows($que) > 0)
     {
-	    while($row = mysql_fetch_assoc($run))
+	    while($row = $que -> fetch_assoc())
 	    {
 			if($alarm == 'showSTOCKS' || $alarm == 'showALARMprod' || $alarm == 'sortTABLE')
 			{

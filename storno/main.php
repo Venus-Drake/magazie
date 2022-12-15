@@ -59,6 +59,11 @@
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
     require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/storno/form.reading.php';
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';
+$SAPcode = (string) $SAPcode;
+$product = (string) $product;
+$furnizor = (string) $furnizor;
+$observatii = (string) $observatii;
+$action = (string) $action;
 
 ?>
 

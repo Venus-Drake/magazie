@@ -4,6 +4,9 @@ require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
 
 global $readSAPCODE; global $readVALBON; global $readSAPCODE; global $tableROW;
 
+if ($worker != 0)
+	$worker = (string) $worker;
+
 $read = "SELECT * FROM `magazie_imprumuturi` WHERE `worker` = '$worker' ORDER BY `sap.code`, `furnizor`, `price`, `end.loan`, `motiv`, `stoc` DESC, `observatii`, `order.closed`";
 if($readrun = mysql_query($read))
 {

@@ -1,5 +1,6 @@
 <?php
-
+	global $nume;
+	
     if(isset($_GET['nume']) && $_GET['nume'] != '') 
 	{
 		$nume = $_GET['nume'];

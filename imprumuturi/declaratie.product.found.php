@@ -1,5 +1,8 @@
 <?php
 
+global $motiv;
+global $observatii;
+
     $addrow = mysql_fetch_assoc($loanchkrun);
     $sapread = $addrow['sap.code'];
     $furnizorREAD = $addrow['furnizor'];

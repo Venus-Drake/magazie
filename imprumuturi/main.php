@@ -18,6 +18,7 @@
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
     require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/imprumuturi/form.reading.php';
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';
+	
 
 ?>
 
@@ -44,13 +45,13 @@
 					   <SELECT ID = "size" TYPE = "text" STYLE="font-size: 1.3vw; WIDTH: 7vw; COLOR: <?php if($size == '') echo '#696969'; else echo 'BLACK';?>" ONCHANGE = "colorChange()">
 				           <OPTION VALUE = "<?php echo $size;?>"><?php if($size == '') echo 'MARIME'; else echo $size;?></OPTION>
 					   </SELECT>
-          		       <INPUT TYPE = "text" ID = "productNameImprumut" STYLE = "FONT-SIZE: 0.6vw; WIDTH: 20vw; HEIGHT: 1.3vw;" value = "<?php echo $product;?>" READONLY PLACEHOLDER = "DENUMIRE PRODUS" TITLE = "<?php echo $product;?>"></INPUT>
-          		       <INPUT TYPE = "text" NAME = "furnizor" STYLE = "FONT-SIZE: 0.6vw; WIDTH: 11.7vw; WIDTH: 20vw;" ID = "furnizorImprumut" READONLY PLACEHOLDER = "FURNIZOR" VALUE = "<?php echo $furnizor;?>" TITLE = "<?php echo $furnizor;?>"></INPUT><BR>
+          		       <INPUT TYPE = "text" ID = "productNameImprumut" STYLE = "FONT-SIZE: 0.6vw; WIDTH: 20vw; HEIGHT: 1.3vw;" value = "<?php echo (string)$product;?>" READONLY PLACEHOLDER = "DENUMIRE PRODUS" TITLE = "<?php echo (string)$product;?>"></INPUT>
+          		       <INPUT TYPE = "text" NAME = "furnizor" STYLE = "FONT-SIZE: 0.6vw; WIDTH: 11.7vw; WIDTH: 20vw;" ID = "furnizorImprumut" READONLY PLACEHOLDER = "FURNIZOR" VALUE = "<?php echo (string)$furnizor;?>" TITLE = "<?php echo (string)$furnizor;?>"></INPUT><BR>
 	           </TD><TR>
 	           <TD STYLE = "TEXT-ALIGN: RIGHT; WHITE-SPACE: NOWRAP;">Motivul imprumutului:&nbsp&nbsp&nbsp</TD>
 	           <TD STYLE = "TEXT-ALIGN: LEFT;">
 	               <SELECT TYPE = "SUBMIT" NAME = "motiv" ID = "motivImprumut" STYLE="font-size: 1.3vw; WIDTH: 12vw">
-	                   <OPTION WIDTH = 100 VALUE = "<?php echo $motiv;?>"><?php echo $motiv;?></OPTION>
+	                   <OPTION WIDTH = 100 VALUE = "<?php echo (string)$motiv;?>"><?php echo (string)$motiv;?></OPTION>
   			           <OPTION WIDTH = 100 VALUE = "Uz temporar">Uz temporar</OPTION>
               		   <OPTION WIDTH = 100 VALUE = "Studiu">Studiu</OPTION>
                 	   <OPTION WIDTH = 100 VALUE = "Instruire">Instruire</OPTION>
@@ -95,7 +96,7 @@
 		       </TD><TR>
 		       <TD STYLE = "TEXT-ALIGN: RIGHT;">Observatii:&nbsp&nbsp&nbsp</TD>
 		       <TD STYLE = "TEXT-ALIGN: LEFT;">
-				      <INPUT ID = "observatii" NAME = "observatii" TYPE = "text" STYLE="font-size:1.3vw; WIDTH: 20vw;" VALUE = "<?php echo $observatii;?>" TITLE = "<?php echo $observatii;?>" PLACEHOLDER = "OBSERVATII"></INPUT>
+				      <INPUT ID = "observatii" NAME = "observatii" TYPE = "text" STYLE="font-size:1.3vw; WIDTH: 20vw;" VALUE = "<?php echo (string)$observatii;?>" TITLE = "<?php echo (string)$observatii;?>" PLACEHOLDER = "OBSERVATII"></INPUT>
 		       </TD><TR>
 		       <TD STYLE = "TEXT-ALIGN: RIGHT;">Actiune:&nbsp&nbsp&nbsp</TD>
 		       <TD STYLE = "TEXT-ALIGN: LEFT;">
@@ -104,7 +105,7 @@
 				      <INPUT ID = "date" NAME = "date" TYPE = "text" VALUE = "<?php echo $date; ?>" HIDDEN = "hidden"></INPUT>
 				      <INPUT ID = "sectia" NAME = "sectia" TYPE = "text" VALUE = "<?php echo $sectia; ?>" HIDDEN = "hidden"></INPUT>
 				      <SELECT ONCHANGE = "this.form.submit()" ID = "action" NAME = "action" TYPE = "submit" STYLE="font-size: 1.3vw; BACKGROUND-COLOR: #67FF75; WIDTH: 7vw">
-				          <OPTION WIDTH = 100 VALUE = "<?php echo $action;?>"><?php echo $action;?></OPTION>
+				          <OPTION WIDTH = 100 VALUE = "<?php echo (string)$action;?>"><?php echo (string)$action;?></OPTION>
 	  			          <OPTION WIDTH = 100 VALUE = "Adauga">Adauga</OPTION>
 	              		  <OPTION WIDTH = 100 VALUE = "Sterge">Sterge</OPTION>
 	                	  <OPTION WIDTH = 100 VALUE = "Anuleaza">Anuleaza</OPTION>

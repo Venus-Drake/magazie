@@ -1,5 +1,6 @@
 <?php
 
+global $nume;
     if(isset($_GET['nume']) && $_GET['nume'] != '') $nume = $_GET['nume'];
     else die("<font color = red size = 5><center><b>Something unexpected went wrong!<br>Please, contact program administrator! Nume inregistrat: $nume");
     require 'C:\xampp\htdocs\ramira\magazie\navigation.html';

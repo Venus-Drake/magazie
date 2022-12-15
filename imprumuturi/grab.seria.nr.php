@@ -1,6 +1,7 @@
 <?php
 
 global $endMaxDate;
+global $marca;
 
 if($endMaxDate == 0) $endMaxDate = $endDate;
 

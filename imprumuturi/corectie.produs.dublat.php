@@ -1,6 +1,6 @@
 <?php
 
-    //echo 'Product doubled. Amount: '.$readrow['amount'].'. My position: '.$readrow['nr.crt'].'. We add it to position '.$nrCRT.' and calculate stocks and values. <BR>';
+global $nrCRT;
 	$readAMOUNT = $readAMOUNT + $readrow['amount'];
 	$readVAL = $readAMOUNT * $readPRICE;
 	$readSTOCKend = $readSTOCK - $readAMOUNT;

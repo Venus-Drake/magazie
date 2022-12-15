@@ -53,6 +53,8 @@
 		   	if($readrow['stoc.final'] == ($readSTOCK - $readAMOUNT)) $readSTOCKend = $readrow['stoc.final'];
 		   	else 
 		 	{
+			if ($readFURNIZOR != 0)
+				$readFURNIZOR = (string) $readFURNIZOR;
 				$readSTOCKend = $readSTOCK - $readAMOUNT;	//FACEM UPDATE LA STOC IN TABEL
 				$readSTOCKupdate = "UPDATE `magazie_imprumuturi` SET `stoc.final` = '$readSTOCKend' WHERE `worker` = '$worker' AND `sap.code` = '$readSAPCODE' AND `furnizor` = '$readFURNIZOR' AND `price` = '$readPRICE' AND `amount` = '$readAMOUNT' AND `motiv` = '$readMOTIV' AND `order.closed` = '0' AND `observatii` = '$readObs' ";
 				if($readSTOCKrun = mysql_query($readSTOCKupdate)){}

@@ -16,8 +16,12 @@
 <BODY ID = "bon_magazie_rs"  ONLOAD = "inserareGESTIONAR()">
 
 	<?php
-	
-	global $amount; global $proc; global $unit;
+
+    global $amount;
+    global $proc;
+    global $unit;
+    global $seria;
+
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
 	
 	$valtot = '0.00';

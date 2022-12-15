@@ -10,20 +10,17 @@
 			if(isset($_GET['nume']) && !empty($_GET['nume'])) $nume = $_GET['nume'];
 			else echo "<SCRIPT>window.location = '/ramira/magazie/index.php/';</SCRIPT>";
 			require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-			$que = "SELECT * FROM `magazie_stoc` ORDER BY `cod_SAP`";
-			if($run = mysql_query($que))
+			if(!$que = $connect -> query("SELECT * FROM `magazie_stoc` ORDER BY `cod_SAP`"))
 			{
-			    if(mysql_num_rows($run) > 0)
-			    {
-					require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
-			    }
-			    else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
-			}
-			else
-			{
-				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+				mysqli_close($connect);
 			}
+			if(mysqli_num_rows($que) > 0)
+			{
+				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
+			}
+			else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
 	    }
 	    else if($alarm == 'sortTABLE')
 	    {
@@ -38,39 +35,38 @@
 					if(isset($_GET['sortby']) && !empty($_GET['sortby'])) 
 					{
 						$sortby = $_GET['sortby'];
-						$que = "SELECT * FROM `magazie_stoc` WHERE `$column` = '$reference' ORDER BY `$sortby`";
+						if(!$que = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `$column` = '$reference' ORDER BY `$sortby`"))
+						{
+							$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+							require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+							mysqli_close($connect);	
+						}
 					}
 					else
 					{
-						$que = "SELECT * FROM `magazie_stoc` WHERE `$column` = '$reference'";
+						if(!$que = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `$column` = '$reference'"))
+						{
+							$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+							require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+							mysqli_close($connect);		
+						}
 					}
-					if($run = mysql_query($que))
-					{
-					    if(mysql_num_rows($run) > 0) require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
-					    else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
-					}
-					else
-					{
-						$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-						require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
-					}
+					if(mysqli_num_rows($que) > 0) require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
+					else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
 				}
 				else
 				{
 				    if(isset($_GET['sortby']) && !empty($_GET['sortby'])) 
 					{
 						$sortby = $_GET['sortby'];
-						$que = "SELECT * FROM `magazie_stoc` ORDER BY `$sortby`";
-						if($run = mysql_query($que))
+						if(!$que = $connect -> query("SELECT * FROM `magazie_stoc` ORDER BY `$sortby`"))
 						{
-						    if(mysql_num_rows($run) > 0) require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
-						    else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
-						}
-						else
-						{
-							$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+							$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 							require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+							mysqli_close($connect);		
 						}
+						if(mysqli_num_rows($que) > 0) require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
+						else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
 					}
 				}
 			}
@@ -86,22 +82,20 @@
 		    else if(isset($_GET['FURNIZOR']) && $_GET['FURNIZOR'] != '') $FURNIZOR = $_GET['FURNIZOR'];
 		    else if(isset($_GET['PRODUCTname']) && $_GET['PRODUCTname'] != '') $PRODname = $_GET['PRODUCTname'];
 		    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-			if($alarm == 'displaySAP') $que = "SELECT * FROM `magazie_stoc` WHERE `cod_SAP` = '$SAPcode'";
-			else if($alarm == 'displayMAGAZIE') $que = "SELECT * FROM `magazie_stoc` WHERE `magazie` = '$magazie' ORDER BY 'cod_SAP'";
-			else if($alarm == 'displayGRUPA') $que = "SELECT * FROM `magazie_stoc` WHERE `grupa_MAT` = '$grupa'";
-			else if($alarm == 'displayFURNIZOR') $que = "SELECT * FROM `magazie_stoc` WHERE `furnizor` = '$FURNIZOR' ORDER BY `cod_SAP`";
-			else if($alarm == 'displayNAME') $que = "SELECT * FROM `magazie_stoc` WHERE `denumire` = '$PRODname'";
-			else if($alarm == 'showALARMprod') $que = "SELECT * FROM `magazie_stoc` ORDER BY `cod_SAP`, `cantitate.minima` DESC";
-			if($run = mysql_query($que))
+			if($alarm == 'displaySAP') $que = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `cod_SAP` = '$SAPcode'");
+			else if($alarm == 'displayMAGAZIE') $que = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `magazie` = '$magazie' ORDER BY 'cod_SAP'");
+			else if($alarm == 'displayGRUPA') $que = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `grupa_MAT` = '$grupa'");
+			else if($alarm == 'displayFURNIZOR') $que = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `furnizor` = '$FURNIZOR' ORDER BY `cod_SAP`");
+			else if($alarm == 'displayNAME') $que = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `denumire` = '$PRODname'");
+			else if($alarm == 'showALARMprod') $que = $connect -> query("SELECT * FROM `magazie_stoc` ORDER BY `cod_SAP`, `cantitate.minima` DESC");
+			if(!$que)
 			{
-			    if(mysql_num_rows($run) > 0) require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
-			    else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
-			}
-			else
-			{
-				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+				$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 				require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';
+				mysqli_close($connect);		
 			}
+			if(mysqli_num_rows($que) > 0) require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/comenzi/table.display.echo.php';
+			else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
 	    }
 	    else echo '<CENTER><IMG SRC="/ramira/magazie/images/warehouse_full.jpg" alt="My happy warehouse" style=" WIDTH:100%; HEIGHT:100%;MARGIN-TOP: 15VW; OVERFLOW: HIDDEN; MARGIN: 0 AUTO; FLOAT: NONE; BORDER-RADIUS: 20PX"></CENTER>';
     }

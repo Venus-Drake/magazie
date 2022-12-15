@@ -23,7 +23,8 @@
 <BODY>
 
 <?php
-
+global $product;
+global $action;
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
     require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/eliberare produs/form.reading.php';
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/navigation.html';

@@ -1,15 +1,12 @@
 <?php
 
-    $bonVALUE = "SELECT `val.tot` FROM `bon_consum_tmp` WHERE `serial.nr` = '$seria' ORDER BY `val.tot` DESC";
-	if($bonVALUErun = mysql_query($bonVALUE))
+    if(!$bonVALUE = $connect -> query("SELECT `val.tot` FROM `bon_consum_tmp` WHERE `serial.nr` = '$seria' ORDER BY `val.tot` DESC"))
+	{die( __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));}
+	$valBON = 0;
+	if(mysqli_num_rows($bonVALUE) > 0)
 	{
-		$valBON = 0;
-    	if(mysql_num_rows($bonVALUErun) > 0)
-    	{
-	        $bonVALUErow = mysql_fetch_assoc($bonVALUErun);
-	        $valBON = $bonVALUErow['val.tot'];
-        }
-    }
-    else die( __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error());
+		$bonVALUErow = $bonVALUE -> fetch_assoc();
+		$valBON = $bonVALUErow['val.tot'];
+	}
 
 ?>

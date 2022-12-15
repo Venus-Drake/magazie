@@ -13,6 +13,10 @@
 
 //echo __FILE__.' called';
 $tempDate = date('Y-m-d h:i:s', strtotime($endDate));
+if($SAPcode != 0)
+	$SAPcode = (string) $SAPcode;
+if ($motiv != 0)
+	$motiv = (string) $motiv;
 $REM = "SELECT `stoc`, `amount`, `price`, `value`, `val.tot` FROM `magazie_imprumuturi` WHERE `sap.code` = '$SAPcode' AND `worker` = '$worker' AND `gestionar` = '$nume' AND `order.closed` = '0' AND `end.loan` = '$tempDate' AND `motiv` = '$motiv' AND `observatii` = '$observatii'";
 if($remrun = mysql_query($REM))
 {

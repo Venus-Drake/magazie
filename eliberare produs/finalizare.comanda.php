@@ -32,52 +32,48 @@ if(mysqli_num_rows($que) > 0)
 		$obs = $row['observatii'];
 		if($uzura == 'Nou') 
 		{
-			$getMAIN = "SELECT `cantitate`, `lastRECEIVED` FROM `magazie_stoc` WHERE `cod_SAP` = '$sap' AND `furnizor` = '$furnizor' AND `pret` = '$value' AND `cantitate` > '0' ORDER BY `lastRECEIVED`";
-			if($getMAINrun = mysql_query($getMAIN))
+			if(!$getMAIN = $connect -> query("SELECT `cantitate`, `lastRECEIVED` FROM `magazie_stoc` WHERE `cod_SAP` = '$sap' AND `furnizor` = '$furnizor' AND `pret` = '$value' AND `cantitate` > '0' ORDER BY `lastRECEIVED`"))
 			{
-				if(mysql_num_rows($getMAINrun) > 0)
+				die( __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
+			}
+			if(mysqli_num_rows($getMAIN) > 0)
+			{
+				while($getMAINrow = $getMAIN -> fetch_assoc())
 				{
-					while($getMAINrow = mysql_fetch_assoc($getMAINrun))
+					$baseSTOCK = $getMAINrow['cantitate'];
+					if($baseSTOCK >= $cantitate)
 					{
-						$baseSTOCK = $getMAINrow['cantitate'];
-						if($baseSTOCK >= $cantitate)
+						$endSTOCK = $baseSTOCK - $cantitate;
+						$receptionat = $getMAINrow['lastRECEIVED'];
+						if(!$updateMAG = $connect -> query("UPDATE `magazie_stoc` SET `cantitate` = '$endSTOCK' WHERE `cod_SAP` = '$sap' AND `furnizor` = '$furnizor' AND `pret` = '$value' AND `lastRECEIVED` = '$receptionat'"))
 						{
-							$endSTOCK = $baseSTOCK - $cantitate;
-							$receptionat = $getMAINrow['lastRECEIVED'];
-							$updateMAG = "UPDATE `magazie_stoc` SET `cantitate` = '$endSTOCK' WHERE `cod_SAP` = '$sap' AND `furnizor` = '$furnizor' AND `pret` = '$value' AND `lastRECEIVED` = '$receptionat'";
-							if($magRUN = mysql_query($updateMAG))
-							{
-								if(mysql_affected_rows() > 0)
-								{
-									$reg = "INSERT INTO `arhiva_miscari_magazie` VALUES('','$seria','$nume','Eliberare produs','','','$angajat','$marca','$sectia','$prod','$sap','$furnizor','','','$value','$cantitate','$units','$endSTOCK','$val_prod','$data_bon','$ora_bon','$obs')";
-									if($regrun = mysql_query($reg))
-									{
-										$rem = "DELETE FROM `bon_consum_tmp` WHERE `marca` = '$marca' AND `cod.SAP` = '$sap' AND `data` = '$data_bon' AND `ora` = '$ora_bon'";
-										if($remrun = mysql_query($rem))
-										{
-											if(mysql_affected_rows() == 0) die('Product could not be removed from receipt.');
-										}
-										else die( __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error());
-									}
-									else die( __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error());
-								}
-							}
-							else die( __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error());
+							die( __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
 						}
-						else
+						if(mysqli_affected_rows($connect) > 0)
 						{
-							echo 'We have a problem! Stock has changed';
-							break;
+							if(!$reg = $connect -> query("INSERT INTO `arhiva_miscari_magazie` VALUES('','$seria','$nume','Eliberare produs','','','$angajat','$marca','$sectia','$prod','$sap','$furnizor','','','$value','$cantitate','$units','$endSTOCK','$val_prod','$data_bon','$ora_bon','$obs')"))
+							{
+								die( __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
+							}
+							if(!$rem = $connect -> query("DELETE FROM `bon_consum_tmp` WHERE `marca` = '$marca' AND `cod.SAP` = '$sap' AND `data` = '$data_bon' AND `ora` = '$ora_bon'"))
+							{
+								die( __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
+							}
+							if(mysqli_affected_rows($connect) == 0) die('Product could not be removed from receipt.');
 						}
 					}
-				}
-				else
-				{
-					echo 'Product not found';
-					break;
+					else
+					{
+						echo 'We have a problem! Stock has changed';
+						break;
+					}
 				}
 			}
-			else die( __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error());
+			else
+			{
+				echo 'Product not found';
+				break;
+			}
 		}
 		else 
 		{
@@ -160,12 +156,11 @@ if(mysqli_num_rows($que) > 0)
 }
 else
 {
-	$dchk = "SELECT * FROM `bon_consum_tmp` WHERE `marca` = '$marca' AND `processed` = '0'";
-	if($dchkrun = mysql_query($dchk))
+	if(!$dchk = $connect -> query("SELECT * FROM `bon_consum_tmp` WHERE `marca` = '$marca' AND `processed` = '0'"))
 	{
-		if(mysql_num_rows($dchkrun) > 0)echo 'Worker confirm';
+		die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
 	}
-	else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
+	if(mysqli_num_rows($dchk) > 0)echo 'Worker confirm';
 }
 
 ?>

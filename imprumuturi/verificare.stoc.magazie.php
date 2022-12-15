@@ -1,5 +1,9 @@
 <?php
 
+if ($readSAPCODE != 0)
+	$readSAPCODE = (string) $readSAPCODE;
+if ($readFURNIZOR != 0)
+	$readFURNIZOR = (string) $readFURNIZOR;
     $stocCHK = "SELECT `cantitate` FROM `magazie_stoc` WHERE `cod_SAP` = '$readSAPCODE' AND `furnizor` = '$readFURNIZOR' AND `pret` = '$readPRICE'";
    	if($stocCHKrun = mysql_query($stocCHK))
    	{

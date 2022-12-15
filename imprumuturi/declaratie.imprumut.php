@@ -1,6 +1,11 @@
 <?php
 
 //CAUTAM IMPRUMUTURILE EFECTUATE DE MUNCITOR PE ACTUALA DECLARATIE.
+global $SAPcode;
+global $motiv;
+global $furnizor;
+global $observatii;
+
 require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
 require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/imprumuturi/grab.seria.nr.php';
 
