@@ -2,6 +2,8 @@
 
 global $observatii;
 
+$marca = (string) $marca;
+
 $addAMOUNT = $addrow['cantitate'] + $addAMOUNT;
 $stocEND = $stock - $addAMOUNT;
 $amountUPDATE = $addrow['cantitate'] + $amount;

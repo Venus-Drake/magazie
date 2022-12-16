@@ -2,6 +2,8 @@
 
 global $marca;
 
+$dateDB = (string) $dateDB;
+
 require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
 if(!$serialGrab = $connect -> query("SELECT `nr.crt`, `serial.nr`, `data` FROM `bon_consum_tmp` WHERE `marca` = '$marca' AND `processed` = '0' ORDER BY `data` DESC, `ora` DESC"))
 {

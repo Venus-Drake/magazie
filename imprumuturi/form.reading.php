@@ -7,7 +7,15 @@
 
 //VERIFICAM DACA S-A INTRODUS CEVA DATA IN FORMULAR SI O PROCESAM, LA NEVOIE
 
-global $worker;global $furnizor;global $observatii; global $product;global $SAPcode;global $marca;global $sectia; global $size;
+global $worker;
+global $furnizor;
+global $observatii;
+global $product;
+global $SAPcode;
+global $marca;
+global $sectia;
+global $size;
+global $endDate;
 
 $motiv = 'Uz temporar';
 $price = '0.00';

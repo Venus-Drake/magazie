@@ -6,6 +6,8 @@ global $furnizor;
 global $stornoAmount;
 global $observatii;
 
+$SAPcode = (string) $SAPcode;
+
     require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
     if(!$casget = $connect -> query("SELECT `cantitate`, `tip.miscare` FROM `arhiva_miscari_magazie` WHERE `marca` = '$marca' AND `cod.SAP` = '$SAPcode'"))
 	{

@@ -113,7 +113,7 @@
 	?>
 </HEAD>
 <BODY>
-    <!--EXTRAGEM DIN BAZA DE DATE SITUATIA LA ZI PE TOATE MAGAZIILE, DEOCAMDATA; SETAM, INSA, OPTIUNI SA EXTRAGEM SITUATII PE MAGAZII, PE CLASE DE SCULE, ETC.--!>
+    <!--EXTRAGEM DIN BAZA DE DATE SITUATIA LA ZI PE TOATE MAGAZIILE, DEOCAMDATA; SETAM, INSA, OPTIUNI SA EXTRAGEM SITUATII PE MAGAZII, PE CLASE DE SCULE, ETC.-->
     
     <DIV CLASS = "OPTIONS">
 	    <BR><BR><BR>
@@ -133,21 +133,21 @@
 		        <OPTION ALIGN = CENTER STYLE = "FONT-WEIGHT: BOLD" VALUE = <?php echo $clasa;?>>SITUATIE PE GRUPE SCULE SI PRODUSE</OPTION>
 		        <?php
 		            require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
-		            $grup = "SELECT `grupa_MAT` FROM `magazie` GROUP BY `grupa_MAT` ORDER BY `grupa_MAT`";
-		            if($gruprun = mysql_query($grup))
-		            {
-					    if(mysql_num_rows($gruprun) > 0)
-					    {
-						    while($gruprow = mysql_fetch_assoc($gruprun))
-						    {
-							    $grup = $gruprow['grupa_MAT'];
-							    if($grup == '') continue;
-							    echo '<OPTION ALIGN = CENTER STYLE = "FONT-WEIGHT: BOLD" VALUE = '.$grup.'>GRUPA '.$grup.'</OPTION>';
-						    }
-					    }
-					    else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>ATENTIE!! NICI O GRUPA DE MATERIALE NU ESTE AFISATA!<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
- 					}
-		            else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysql_error().'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
+		            if(!$grup = $connect -> query("SELECT `grupa_MAT` FROM `magazie` GROUP BY `grupa_MAT` ORDER BY `grupa_MAT`"))
+					{
+	                	mysqli_close($connect);
+						die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysqli_error($connect).'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');
+					}
+		            if(mysqli_num_rows($grup) > 0)
+					{
+						while($gruprow = $grup -> fetch_assoc())
+						{
+							$grup = $gruprow['grupa_MAT'];
+							if($grup == '') continue;
+							echo '<OPTION ALIGN = CENTER STYLE = "FONT-WEIGHT: BOLD" VALUE = '.$grup.'>GRUPA '.$grup.'</OPTION>';
+						}
+					}
+					else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>ATENTIE!! NICI O GRUPA DE MATERIALE NU ESTE AFISATA!<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
 				?>
 	        </SELECT>
         </FORM>

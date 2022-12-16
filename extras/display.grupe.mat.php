@@ -1,5 +1,6 @@
 <?php
 
+$nume = (string) $nume;
     if(isset($_GET['nume']) && $_GET['nume'] != '') 
 	{
 		$nume = $_GET['nume'];
@@ -107,30 +108,27 @@
 	    <BUTTON CLASS = "SITUATII" ONCLICK = "location.href='http://localhost/ramira/magazie/Extras/display.grupe.mat.php?nume=<?php echo $nume.'&userid='.$user; ?>'" TARGET = "_SELF"><B>AFISARE GRUPE MATERIALE</BUTTON><BR>
     </DIV>
     <DIV CLASS = "DISPLAY">
-        <!--EXTRAGEM FURNIZORII, PENTRU A FOLOSI, PE VIITOR, DATELE FIECARUIA, CU CE PRODUSE AU SI LA CE PRETURI, ETC...--!>
+        <!--EXTRAGEM FURNIZORII, PENTRU A FOLOSI, PE VIITOR, DATELE FIECARUIA, CU CE PRODUSE AU SI LA CE PRETURI, ETC...-->
         <?PHP
 		    require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
 		    echo '<BR><BR><BR><CENTER><B><U>GRUPE MATERIALE LA '.$datetime.'</U></B><BR><BR>';
-		    $mag = "SELECT `grupa_MAT` FROM `magazie` GROUP BY `grupa_MAT` ORDER BY `grupa_MAT`";
-		    if($marun = mysql_query($mag))
+		    if(!$mag = $connect -> query("SELECT `grupa_MAT` FROM `magazie` GROUP BY `grupa_MAT` ORDER BY `grupa_MAT`"))
+			{die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysqli_error($connect).'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');}
+		    ECHO('<TABLE STYLE = "WIDTH: 80%; BORDER: 3px SOLID BLACK;BORDER-COLLAPSE: COLLAPSE;">
+						<TH STYLE = "WIDTH: 3%; TEXT-ALIGN = CENTER">Nr.Crt.</TH><TH STYLE = "WIDTH: 96%; TEXT-ALIGN = CENTER">Grupa materiale si produse</TH><TR>');
+			if(mysqli_num_rows($mag) > 0)
 			{
-				ECHO('<TABLE STYLE = "WIDTH: 80%; BORDER: 3px SOLID BLACK;BORDER-COLLAPSE: COLLAPSE;">
-				         <TH STYLE = "WIDTH: 3%; TEXT-ALIGN = CENTER">Nr.Crt.</TH><TH STYLE = "WIDTH: 96%; TEXT-ALIGN = CENTER">Grupa materiale si produse</TH><TR>');
-				if(mysql_num_rows($marun) > 0)
+				$nrcrt = 0;
+				while($magrow = $mag -> fetch_assoc())
 				{
-					$nrcrt = 0;
-				    while($magrow = mysql_fetch_assoc($marun))
-				    {
-					    $nrcrt++;
-						$grupaMAT = $magrow['grupa_MAT'];
-						if($grupaMAT == '') continue;
-						echo '<TR CLASS = "ROW"><TD>'.$nrcrt.'</TD><TD>'.$grupaMAT.'</TD>';
-					}
-					echo '</TABLE><BR><BR>';
+					$nrcrt++;
+					$grupaMAT = $magrow['grupa_MAT'];
+					if($grupaMAT == '') continue;
+					echo '<TR CLASS = "ROW"><TD>'.$nrcrt.'</TD><TD>'.$grupaMAT.'</TD>';
 				}
-				else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>Something is not right!<BR>Nu avem data despre nici un furnizor?!!<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
-            }
-		    else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysql_error().'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
+				echo '</TABLE><BR><BR>';
+			}
+			else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>Something is not right!<BR>Nu avem data despre nici un furnizor?!!<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
 		?>
     </DIV>
 

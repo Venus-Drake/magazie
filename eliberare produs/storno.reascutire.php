@@ -7,6 +7,8 @@ global $observatii;
 global $grupaMAT;
 global $masina;
 
+$worker = (string) $worker;
+
 $valPRODUS = $price * $amount;
 $data_bon = date('Y/m/d h:i:s',time());
 $ora_bon = date('h:i:s', time());

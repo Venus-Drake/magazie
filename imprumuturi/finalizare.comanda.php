@@ -11,126 +11,66 @@ require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
 
 global $num;
 
-$fin = "SELECT * FROM `magazie_imprumuturi` WHERE `marca` = '$marca' AND `order.closed` = '1'";
-if($finrun = mysql_query($fin))
+if(!$fin = $connect -> query("SELECT * FROM `magazie_imprumuturi` WHERE `marca` = '$marca' AND `order.closed` = '1'"))
 {
-	$numfin = mysql_num_rows($finrun);
-    if($numfin > 0)
-    {
-		while($finrow = mysql_fetch_assoc($finrun))
+	die('MySQL Error: %0A'.__LINE__.". ".__FILE__.":%0A".mysqli_error($connect).'%0APlease, contact program administrator!');
+}
+$numfin = mysqli_num_rows($fin);
+if($numfin > 0)
+{
+	while($finrow = $fin -> fetch_assoc())
+	{
+		$nrCRT = $finrow['nr.crt'];
+		$serieBON = $finrow['serial.nr'];
+		$motiv = $finrow['motiv'];
+		$angajat = $finrow['worker'];
+		$sectia = $finrow['sectia'];
+		$prod = $finrow['item.name'];
+		$sap = $finrow['sap.code'];
+		$furnizor = $finrow['furnizor'];
+		$val = $finrow['price'];
+		$cantitate = $finrow['amount'];
+		$units = $finrow['unitate.mas'];
+		$val_prod = $finrow['value'];
+		$data_bon = date('Y-m-d', strtotime($finrow['date']));
+		$ora_bon = date('h:i:s', strtotime($finrow['date']));
+		$dataLIMITA = $finrow['end.loan'];
+		$obs = $finrow['observatii'];
+		if(!$stocout = $connect -> query("SELECT `cantitate` FROM `magazie_stoc` WHERE `cod_SAP` = '$sap'"))
+		{die('MySQL Error: %0A'.__LINE__.". ".__FILE__.":%0A".mysqli_error($connect).'%0APlease, contact program administrator!');}
+		if(mysqli_num_rows($stocout) > 0)
 		{
-			$nrCRT = $finrow['nr.crt'];
-			$serieBON = $finrow['serial.nr'];
-			$motiv = $finrow['motiv'];
-			$angajat = $finrow['worker'];
-			$sectia = $finrow['sectia'];
-		    $prod = $finrow['item.name'];
-		    $sap = $finrow['sap.code'];
-		    $furnizor = $finrow['furnizor'];
-		    $val = $finrow['price'];
-		    $cantitate = $finrow['amount'];
-		    $units = $finrow['unitate.mas'];
-		    $val_prod = $finrow['value'];
-		    $data_bon = date('Y-m-d', strtotime($finrow['date']));
-		    $ora_bon = date('h:i:s', strtotime($finrow['date']));
-		    $dataLIMITA = $finrow['end.loan'];
-		    $obs = $finrow['observatii'];
-		    $stocout = "SELECT `cantitate` FROM `magazie_stoc` WHERE `cod_SAP` = '$sap'";
-		    if($stocrun = mysql_query($stocout))
-		    {
-			    if(mysql_num_rows($stocrun) > 0)
-			    {
-				    $stocrow = mysql_fetch_assoc($stocrun);	
-				    $stoc = $stocrow['cantitate'];
-				    $stoc = $stoc - $cantitate;
-				    if($stoc >= 0)  //FACEM UPDATE LA STOC IN MAGAZIE
-				    {
-				        $stocup = "UPDATE `magazie_stoc` SET `cantitate` = '$stoc' WHERE `cod_SAP` = '$sap' AND `furnizor` = '$furnizor' AND `pret` = '$val'";
-				        if($stocuprun = mysql_query($stocup))
-				        {
-						    //INREGISTRAM MISCAREA IN ARHIVA
-							$reg = "INSERT INTO `arhiva_miscari_magazie` VALUES('','$serieBON','Imprumut produs','$motiv','$dataLIMITA','$angajat','$marca','$sectia','$prod','$sap','$furnizor','$val','$cantitate','$units','$stoc','$val_prod','$data_bon','$ora_bon','$obs')";
-							if($regrun = mysql_query($reg))
-							{
-							    //SCOATEM MISCAREA DE PE BONUL DE COMANDA
-							    $rem = "DELETE FROM `magazie_imprumuturi` WHERE `nr.crt` = '$nrCRT'";
-							    if($remrun = mysql_query($rem))
-							    {
-								    $num++;
-									if($num == $numfin) echo 'OK';
-							    }
-                                else 
-{
-	echo
-'MySQL Error:
-'.__LINE__.". ".__FILE__.":
-".mysql_error().'
-Please, contact program administrator!';
-break;
-}
-							}
-							else 
-{
-	echo
-'MySQL Error:
-'.__LINE__.". ".__FILE__.":
-".mysql_error().'
-Please, contact program administrator!';
-break;
-}
-		                }
-                        else
-{
-echo'MySQL Error:
-'.__LINE__.". ".__FILE__.":
-".mysql_error().'
-Please, contact program administrator!';
-break;
-}
-				    }
-					else 
-{
-echo 'Operatiunea nu poate fi efectuata!
-Stoc negativ pentru '.$sap.'!!';
-break;
-}
-			    }
-			    else 
-{
-echo 'Codul '.$sap.' nu a fost gasit!';
-break;
-}
-		    }
-            else 
-{
-echo'MySQL Error:
-'.__LINE__.". ".__FILE__.":
-".mysql_error().'
-Please, contact program administrator!';
-break;
-}
+			$stocrow = $stocout -> fetch_assoc();	
+			$stoc = $stocrow['cantitate'];
+			$stoc = $stoc - $cantitate;
+			if($stoc >= 0)  
+			{
+				//FACEM UPDATE LA STOC IN MAGAZIE
+
+				if(!$stocup = $connect -> query("UPDATE `magazie_stoc` SET `cantitate` = '$stoc' WHERE `cod_SAP` = '$sap' AND `furnizor` = '$furnizor' AND `pret` = '$val'"))
+				{die('MySQL Error: %0A'.__LINE__.". ".__FILE__.":%0A".mysqli_error($connect).'%0APlease, contact program administrator!');}
+				//INREGISTRAM MISCAREA IN ARHIVA
+
+				if(!$reg = $connect -> query("INSERT INTO `arhiva_miscari_magazie` VALUES('','$serieBON','Imprumut produs','$motiv','$dataLIMITA','$angajat','$marca','$sectia','$prod','$sap','$furnizor','$val','$cantitate','$units','$stoc','$val_prod','$data_bon','$ora_bon','$obs')"))
+				{die('MySQL Error: %0A'.__LINE__.". ".__FILE__.":%0A".mysqli_error($connect).'%0APlease, contact program administrator!');}
+				//SCOATEM MISCAREA DE PE BONUL DE COMANDA
+				
+				if(!$rem = $connect -> query("DELETE FROM `magazie_imprumuturi` WHERE `nr.crt` = '$nrCRT'"))
+				{die('MySQL Error: %0A'.__LINE__.". ".__FILE__.":%0A".mysqli_error($connect).'%0APlease, contact program administrator!');}
+				$num++;
+				if($num == $numfin) echo 'OK';
+			}
+			else die('Operatiunea nu poate fi efectuata!%0AStoc negativ pentru '.$sap.'!!');
 		}
-    }
-    else
-    {
-		$dchk = "SELECT * FROM `magazie_imprumuturi` WHERE `marca` = '$marca' AND `order.closed` = '0'";
-		if($dchkrun = mysql_query($dchk))
-		{
-		    if(mysql_num_rows($dchkrun) > 0) 
-echo 'Comanda nu a fost confirmata de catre angajat.
-Va rog, solicitati confirmarea comenzii!';
-		    else 
-echo 'Nu a fost gasita nici o comanda pentru '.$marca.'!';
-		}
-else echo'MySQL Error:
-'.__LINE__.". ".__FILE__.":
-".mysql_error().'
-Please, contact program administrator!';
-    }
+		else die('Codul '.$sap.' nu a fost gasit!');
+	}
 }
-else echo'MySQL Error:
-'.__LINE__.". ".__FILE__.":
-".mysql_error().'
-Please, contact program administrator!';
+else
+{
+	if(!$dchk = $connect -> query("SELECT * FROM `magazie_imprumuturi` WHERE `marca` = '$marca' AND `order.closed` = '0'"))
+	{die('MySQL Error: %0A'.__LINE__.". ".__FILE__.":%0A".mysqli_error($connect).'%0APlease, contact program administrator!');}
+	if(mysqli_num_rows($dchk) > 0) die('Comanda nu a fost confirmata de catre angajat.%0AVa rog, solicitati confirmarea comenzii!');
+	else die('Nu a fost gasita nici o comanda pentru '.$marca.'!');
+}
 
 ?>

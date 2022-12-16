@@ -2,6 +2,8 @@
 
 global $markNAME;
 
+$gestionar = (string) $gestionar;
+
 date_default_timezone_set('Europe/Bucharest');
 $Dates = date('Y/m/d h:i:s',time());
 $Time = date('h:i:s', time());

@@ -98,75 +98,66 @@ global $nume;
 	    <BUTTON CLASS = "SITUATII" ONCLICK = "location.href='http://localhost/ramira/magazie/Extras/build.magazie.stoc.php?nume=<?php echo $nume;?>'" TARGET = "_SELF"><B>MAGAZIE STOC BUILDING</BUTTON><BR>
     </DIV>
     <DIV CLASS = "DISPLAY">
-        <!--AICI FACEM UN BUILD AL MAGAZIEI. FOARTE POSIBIL SA NU MAI FIE NECESAR PE VIITOR...DAR PANA ATUNCI, EU AM NEVOIE DE EL.--!>
+        <!--AICI FACEM UN BUILD AL MAGAZIEI. FOARTE POSIBIL SA NU MAI FIE NECESAR PE VIITOR...DAR PANA ATUNCI, EU AM NEVOIE DE EL.-->
         <?PHP
 		    //EXTRAGEM PRODUSELE DIN TABELUL magazie SI VERIFICAM DACA LE AVEM IN magazie_stoc; DACA NU LE AVEM, LE ADAUGAM. FAC SI NISTE STOCURI EMPIRICE, CU OCAZIA ASTA.
 		    require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
 		    echo '<BR><BR><BR><CENTER><B><U>STOC MAGAZIE IN '.$datetime.'</U></B><BR><BR>';
-		    $mag = "SELECT * FROM `magazie` GROUP BY `cod_sap` ORDER BY `cod_sap`";
-		    if($marun = mysql_query($mag))
-			{
-				ECHO('<TABLE STYLE = "WIDTH: 98%; BORDER: 3px SOLID BLACK;BORDER-COLLAPSE: COLLAPSE;">
+		    if(!$mag = $connect -> query("SELECT * FROM `magazie` GROUP BY `cod_sap` ORDER BY `cod_sap`"))
+			{die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysqli_error($connect).'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');}
+		    ECHO('<TABLE STYLE = "WIDTH: 98%; BORDER: 3px SOLID BLACK;BORDER-COLLAPSE: COLLAPSE;">
 				         <TH STYLE = "WIDTH: 3%; TEXT-ALIGN = CENTER">Nr.Crt.</TH><TH STYLE = "WIDTH: 5%; TEXT-ALIGN = CENTER">Cod SAP</TH><TH STYLE = "WIDTH: 3%;">Denumire produs</TH><TH STYLE = "WIDTH: 5%;">Cantitate</TH><TH STYLE = "WIDTH: 3%; TEXT-ALIGN = CENTER">U.M.</TH><TH STYLE = "WIDTH: 3%; TEXT-ALIGN = CENTER">Magazie</TH><TH STYLE = "WIDTH: 3%; TEXT-ALIGN = CENTER">Grupa materiale</TH><TH STYLE = "WIDTH: 3%; TEXT-ALIGN = CENTER">Pret</TH><TH STYLE = "WIDTH: 20%;">Furnizor</TH><TH STYLE = "WIDTH: 25%;">Observatii</TH><TR>');
-				if(mysql_num_rows($marun) > 0)
+			if(mysqli_num_rows($mag) > 0)
+			{
+				$nrcrt = 0;
+				while($magrow = $mag -> fetch_assoc())
 				{
-					$nrcrt = 0;
-				    while($magrow = mysql_fetch_assoc($marun))
-				    {
-					    $cod_sap = $magrow['cod_sap'];
-					    if($cod_sap == '') continue;
-					    //VERIFICAM PRODUSUL IN magazie_stoc
-					    $mver = "SELECT * FROM `magazie_stoc` WHERE `cod_SAP` = '$cod_sap'";
-					    if($verrun = mysql_query($mver))
-					    {
-						    if(mysql_num_rows($verrun) > 0)
-						    {
-								//PRODUSUL ESTE IN MAGAZIE; PUR SI SIMPLU, AFISAM DATELE DESPRE EL.
-								while($verrow = mysql_fetch_assoc($verrun))
-								{
-									$nrcrt++;
-									$denumire = $verrow['denumire'];
-									$cantitate = $verrow['cantitate'];
-									$unit_mas = $verrow['UM'];
-									$furnizor = $verrow['furnizor'];
-									$magazie = $verrow['magazie'];
-									$grupa_mat = $verrow['grupa_MAT'];
-									$pret = $verrow['pret'];
-									$observatii = $verrow['observatii'];
-							        echo '<TR CLASS = "ROW"><TD>'.$nrcrt.'</TD><TD>'.$cod_sap.'</TD><TD>'.$denumire.'</TD><TD>'.$cantitate.'</TD><TD>'.$unit_mas.'</TD><TD>'.$magazie.'</TD><TD>'.$grupa_mat.'</TD><TD>'.$pret.'</TD><TD>'.$furnizor.'</TD><TD>'.$observatii.'</TD>';
-							    }
-						    }
-						    else
-						    {
-							    //PRODUSUL NU ESTE IN magazie_stoc; IL INTRODUCEM
-							    $denumire = mysql_real_escape_string($magrow['denumire']);
-							    $cantitate = $magrow['cantitate'];
-							    $unit_mas = $magrow['unit_mas'];
-							    $furnizor = $magrow['furnizor'];
-							    $magazie = $magrow['magazie'];
-							    $grupa_mat = $magrow['grupa_mat'];
-							    $observatii = $magrow['observatii'];
-							    $pret = $magrow['pret'];
-							    if($pret > 1000) $cantitate = rand(5,20);
-							    else if($pret >= 500 && $pret <= 1000) $cantitate = rand(20,100);
-							    else if($pret >= 50 && $pret < 500) $cantitate = rand(50,300);
-							    else if($pret >= 1 && $pret < 50) $cantitate = rand(100,500);
-							    else $cantitate = rand(200,1000);
-								$magadd = "INSERT INTO `magazie_stoc` VALUES('','$denumire','$cantitate','$unit_mas','$furnizor','$magazie','$cod_sap','$grupa_mat','$pret','Added $datetime')";
-								if($addrun = mysql_query($magadd))
-								{
-									$nrcrt++;
-								    echo '<TR CLASS = "ROW"><TD>'.$nrcrt.'</TD><TD>'.$cod_sap.'</TD><TD>'.$denumire.'</TD><TD>'.$cantitate.'</TD><TD>'.$unit_mas.'</TD><TD>'.$magazie.'</TD><TD>'.$grupa_mat.'</TD><TD>'.$pret.'</TD><TD>'.$furnizor.'</TD><TD>'.$observatii.'</TD>';
-								}
-                                else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysql_error().'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
-						    }
-					    }
-					    else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysql_error().'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
-				    }
+					$cod_sap = $magrow['cod_sap'];
+					if($cod_sap == '') continue;
+					//VERIFICAM PRODUSUL IN magazie_stoc
+					if(!$mver = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `cod_SAP` = '$cod_sap'")) {
+			        die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>' . __LINE__ . '. ' . __FILE__ . '<BR>' . mysqli_error($connect) . '<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');}
+					if(mysqli_num_rows($mver) > 0)
+					{
+						//PRODUSUL ESTE IN MAGAZIE; PUR SI SIMPLU, AFISAM DATELE DESPRE EL.
+						while($verrow = $mver -> fetch_assoc())
+						{
+							$nrcrt++;
+							$denumire = $verrow['denumire'];
+							$cantitate = $verrow['cantitate'];
+							$unit_mas = $verrow['UM'];
+							$furnizor = $verrow['furnizor'];
+							$magazie = $verrow['magazie'];
+							$grupa_mat = $verrow['grupa_MAT'];
+							$pret = $verrow['pret'];
+							$observatii = $verrow['observatii'];
+							echo '<TR CLASS = "ROW"><TD>'.$nrcrt.'</TD><TD>'.$cod_sap.'</TD><TD>'.$denumire.'</TD><TD>'.$cantitate.'</TD><TD>'.$unit_mas.'</TD><TD>'.$magazie.'</TD><TD>'.$grupa_mat.'</TD><TD>'.$pret.'</TD><TD>'.$furnizor.'</TD><TD>'.$observatii.'</TD>';
+						}
+					}
+					else
+					{
+						//PRODUSUL NU ESTE IN magazie_stoc; IL INTRODUCEM
+						$denumire = mysqli_real_escape_string($connect,$magrow['denumire']);
+						$cantitate = $magrow['cantitate'];
+						$unit_mas = $magrow['unit_mas'];
+						$furnizor = $magrow['furnizor'];
+						$magazie = $magrow['magazie'];
+						$grupa_mat = $magrow['grupa_mat'];
+						$observatii = $magrow['observatii'];
+						$pret = $magrow['pret'];
+						if($pret > 1000) $cantitate = rand(5,20);
+						else if($pret >= 500 && $pret <= 1000) $cantitate = rand(20,100);
+						else if($pret >= 50 && $pret < 500) $cantitate = rand(50,300);
+						else if($pret >= 1 && $pret < 50) $cantitate = rand(100,500);
+						else $cantitate = rand(200,1000);
+						if(!$magadd = $connect -> query("INSERT INTO `magazie_stoc` VALUES('','$denumire','$cantitate','$unit_mas','$furnizor','$magazie','$cod_sap','$grupa_mat','$pret','Added $datetime')"))
+						{die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>' . __LINE__ . '. ' . __FILE__ . '<BR>' . mysqli_error($connect) . '<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');}
+						$nrcrt++;
+						echo '<TR CLASS = "ROW"><TD>'.$nrcrt.'</TD><TD>'.$cod_sap.'</TD><TD>'.$denumire.'</TD><TD>'.$cantitate.'</TD><TD>'.$unit_mas.'</TD><TD>'.$magazie.'</TD><TD>'.$grupa_mat.'</TD><TD>'.$pret.'</TD><TD>'.$furnizor.'</TD><TD>'.$observatii.'</TD>';
+					}
 				}
-				else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>Something is not right!<BR>Table magazie is EMPTY!<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
-            }
-		    else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysql_error().'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
+			}
+			else echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>Something is not right!<BR>Table magazie is EMPTY!<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';
 		?>
     </DIV>
 
