@@ -22,7 +22,7 @@ if(isset($_POST['sapTOadd']) && !empty($_POST['sapTOadd']) && isset($_POST['prod
 	$sectia = $_POST['sectia'];
 	$gestionar = $_POST['gestionar'];
 	$observatii = $_POST['observatii'];
-	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+	require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	//AM MAI INTRODUS PRODUSUL PE BON?
 	if(!$bonCHK = $connect -> query("SELECT `cantitate`, `valoare` FROM `bon_consum_tmp` WHERE `marca` = '$marca' AND `cod.SAP` LIKE '$sapCODE' AND `furnizor` = '$furnizor' AND `uzura` = '$uzura' AND `observatii` = '$observatii'"))
 	{
@@ -409,3 +409,4 @@ if(isset($_POST['sapTOadd']) && !empty($_POST['sapTOadd']) && isset($_POST['prod
 else die(__LINE__.'. Something is wrong...');
 
 ?>
+Available=Doesn't Matter, Placed=Doesn't Matter, Add running=No, Machine Enumerat.=CNC5M, Include Planned=No, Include On Hold=No, All running=No, PO Due Date From=20.10.2021 To=31.12.2021, Service=Doesn't Matter, Delivered=No, Detail Sorting=By Importance/Remains
