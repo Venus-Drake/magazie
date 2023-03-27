@@ -1,19 +1,16 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/imprumuturi/grab.seria.nr.php';
 
 $endDate = date('Y-m-d 12:i:s',strtotime($endDate));
 
 //IN PRIMUL RAND VERIFICAM DACA NU CUMVA AM MAI INTRODUS PRODUSUL, CU EXACT ACELEASI DATE
-if ($SAPcode != 0)
-	$SAPcode = (string) $SAPcode;
-if ($motiv != 0)
-	$motiv = (string) $motiv;
-if ($furnizor != 0)
-	$furnizor = (string) $furnizor;
-if ($observatii != 0)
-	$observatii = (string) $observatii;
+$SAPcode = (string) $SAPcode;
+$motiv = (string) $motiv;
+$furnizor = (string) $furnizor;
+$observatii = (string) $observatii;
+$nume = (string) $nume;
 
 if(!$storno = $connect -> query("SELECT * FROM `declaratie_storno` WHERE `nume` = '$worker'  AND `cod.SAP` = '$SAPcode' AND `end.loan` = '$endDate' AND `motiv` = '$motiv' AND `furnizor` = '$furnizor' AND `valoare` = '$price' AND `processed` = '0' AND `observatii` = '$observatii'"))
 {

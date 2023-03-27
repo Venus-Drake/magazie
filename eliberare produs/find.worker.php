@@ -1,6 +1,7 @@
 <?php
 
 global $markNAME;
+global $gestionar;
 
 $gestionar = (string) $gestionar;
 
@@ -11,7 +12,7 @@ $Time = date('h:i:s', time());
 if(isset($_POST['numeworker']) && $_POST['numeworker'] != '')
 {
 	$numeworker = $_POST['numeworker'];
-	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+	require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(!$wchk = $connect -> query("SELECT `WORKER_ID`, `WORKER_Name` FROM `pworker` WHERE `WORKER_Name` LIKE '$numeworker%' LIMIT 20"))
 	{
 		die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
@@ -31,7 +32,7 @@ if(isset($_POST['numeworker']) && $_POST['numeworker'] != '')
 else if(isset($_POST['workerNAME']) && !empty($_POST['workerNAME']))
 {
     $name = $_POST['workerNAME'];
-    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(!$que = $connect -> query("SELECT `WORKER_ID`, `sectie` FROM `pworker` WHERE `WORKER_Name` LIKE '$name'"))
 	{
 		die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
@@ -48,7 +49,7 @@ else if(isset($_POST['workerNAME']) && !empty($_POST['workerNAME']))
 else if(isset($_POST['workerID']) && !empty($_POST['workerID']))
 {
     $marca = $_POST['workerID'];
-    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(!$que = $connect -> query("SELECT `WORKER_Name`, `sectie` FROM `pworker` WHERE `WORKER_ID` = '$marca'"))
 	{
 		die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));
@@ -173,7 +174,7 @@ else if(isset($_POST['workerID']) && !empty($_POST['workerID']))
 else if(isset($_POST['worker']) && $_POST['worker'] != '')
 {
 	$marca = $_POST['worker'];
-	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+	require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	if(!$wchk = $connect -> query("SELECT `WORKER_ID`, `WORKER_Name` FROM `pworker` WHERE `WORKER_ID` LIKE '$marca%' LIMIT 20"))
 	{
 		die(__LINE__ . '. MySQL error in ' . __FILE__ . ': ' . mysqli_error($connect));	

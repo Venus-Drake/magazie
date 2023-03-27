@@ -25,6 +25,7 @@
 <?php
 global $product;
 global $action;
+$date = (string) $date;
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
     require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/eliberare produs/form.reading.php';
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/navigation.html';
@@ -73,7 +74,7 @@ global $action;
 					      <INPUT ID = "stock" NAME = "stoc" TYPE = "text" VALUE = "<?php echo $stock; ?>" HIDDEN = "hidden"></INPUT>
 					      <INPUT ID = "angajat" NAME = "angajat" TYPE = "text" VALUE = "<?php echo $worker; ?>" HIDDEN = "hidden"></INPUT>
 					      <INPUT ID = "date" NAME = "date" TYPE = "text" VALUE = "<?php echo $date; ?>" HIDDEN = "hidden"></INPUT>
-					      <INPUT ID = "sectia" NAME = "sectia" TYPE = "text" VALUE = "<?php echo $sectia; ?>" HIDDEN = "hidden"></INPUT>
+					      <INPUT ID = "sectia" NAME = "sectia" TYPE = "text" VALUE = "<?php echo (string)$sectia; ?>" HIDDEN = "hidden"></INPUT>
 					      <SELECT ONCHANGE = "this.form.submit()" ID = "action" NAME = "action" TYPE = "text" WIDTH = 100 STYLE="font-size:24">
 					          <OPTION WIDTH = 100 VALUE = "<?php echo $action;?>"><?php echo $action;?></OPTION>
 		  			          <OPTION WIDTH = 100 VALUE = "Adauga">Adauga</OPTION>

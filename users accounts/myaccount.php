@@ -71,182 +71,155 @@
 			if(isset($_POST['update_process']) && !empty($_POST['update_process']))
 			{
 				$updatePROCESS = $_POST['update_process'];
-			    require $_SERVER['DOCUMENT_ROOT'].'\ramira\magazie\connect.inc.php';
+			    require $_SERVER['DOCUMENT_ROOT'].'\ramira\connect.inc.php';
 			    $datetime = date('Y-m-d h:i:s', time());
 			    $azi = date('Y-m-d', time());
 			    $acum = date('h:i', time());
-			    $chkarhive = "SELECT `schimbariEFECTUATE` FROM `arhiva_dezvoltare` WHERE DATE(`data`) = '$azi'";
-			    if($chkarhiveRUN = mysql_query($chkarhive))
-			    {
-				    if(mysql_num_rows($chkarhiveRUN) > 0)
-				    {
-					    $chkarhiveROW = mysql_fetch_assoc($chkarhiveRUN);
-					    $schimbare = $chkarhiveROW['schimbariEFECTUATE'];
-					    $updatePROCESS = '<b>'.$acum.'</b> - '.$updatePROCESS.'<BR>'.$schimbare;
-					    $update = "UPDATE `arhiva_dezvoltare` SET `schimbariEFECTUATE` = '$updatePROCESS', `data` = '$datetime' WHERE DATE(`data`) = '$azi'";
-						if($updateRUN = mysql_query($update))
-						{
-							$readUPDATES = "SELECT * FROM `arhiva_dezvoltare` ORDER BY `data` DESC";
-							if($readUPDATESrun = mysql_query($readUPDATES))
-							{
-							    if(mysql_num_rows($readUPDATESrun) > 0)
-							    {
-									$desfasuratorDEV = '<DIV><TABLE STYLE = "WIDTH: 99%; FONT-SIZE: 0.9vw; BORDER: 2px SOLID BLACK; MARGIN: 0 AUTO; MARGIN-TOP: 1VW;">
-		                                                <TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; WIDTH: 20%; BORDER: 1px SOLID BLACK;">DATA</TH>
-										  				<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; BORDER: 1px SOLID BLACK;">OPERATIUNI DE DEZVOLTARE EFECTUATE</TH><TR>';
-								    while($readUPDATESrow = mysql_fetch_assoc($readUPDATESrun))
-								    {
-										$updateDATA = date('d M Y - H:i',strtotime($readUPDATESrow['data']));
-									    $updateREAD = $readUPDATESrow['schimbariEFECTUATE'];
-									    $desfasuratorDEV = $desfasuratorDEV.'<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK;">'.$updateDATA.'</TD>
-										                                       <TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK; TEXT-ALIGN: LEFT;">'.$updateREAD.'</TD><TR>';
-								    }
-								    $desfasuratorDEV = $desfasuratorDEV.'</TABLE></DIV>';
-							    }
-							}
-							else
-							{
-								$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-								require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
-							}
-		                }
-						else
-						{
-							$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-							require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
-						}
-				    }
-				    else
-				    {
-						$updatePROCESS = '<b>'.$acum.'</b> - '.$updatePROCESS;
-					    $update = "INSERT INTO `arhiva_dezvoltare` VALUES('','$updatePROCESS','$datetime')";
-						if($updateRUN = mysql_query($update))
-						{
-							$readUPDATES = "SELECT * FROM `arhiva_dezvoltare` ORDER BY `data` DESC";
-							if($readUPDATESrun = mysql_query($readUPDATES))
-							{
-							    if(mysql_num_rows($readUPDATESrun) > 0)
-							    {
-									$desfasuratorDEV = '<DIV><TABLE STYLE = "WIDTH: 99%; FONT-SIZE: 0.9vw; BORDER: 2px SOLID BLACK; MARGIN: 0 AUTO; MARGIN-TOP: 1VW;">
-		                                                <TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; WIDTH: 20%; BORDER: 1px SOLID BLACK;">DATA</TH>
-										  				<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; BORDER: 1px SOLID BLACK;">OPERATIUNI DE DEZVOLTARE EFECTUATE</TH><TR>';
-								    while($readUPDATESrow = mysql_fetch_assoc($readUPDATESrun))
-								    {
-										$updateDATA = date('d M Y - H:i',strtotime($readUPDATESrow['data']));
-									    $updateREAD = $readUPDATESrow['schimbariEFECTUATE'];
-									    $desfasuratorDEV = $desfasuratorDEV.'<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK;">'.$updateDATA.'</TD>
-										                                       <TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK; TEXT-ALIGN: LEFT;">'.$updateREAD.'</TD><TR>';
-								    }
-								    $desfasuratorDEV = $desfasuratorDEV.'</TABLE></DIV>';
-							    }
-							}
-							else
-							{
-								$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-								require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
-							}
-		                }
-						else
-						{
-							$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-							require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
-						}
-				    }
-			    }
-			    else
+			    if(!$chkarhive = $connect -> query("SELECT `schimbariEFECTUATE` FROM `arhiva_dezvoltare` WHERE DATE(`data`) = '$azi'"))
 				{
-					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 					require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+					mysqli_close($connect);
+				}
+			    if(mysqli_num_rows($chkarhive) > 0)
+				{
+					$chkarhiveROW = $chkarhive -> fetch_assoc();
+					$schimbare = $chkarhiveROW['schimbariEFECTUATE'];
+					$updatePROCESS = '<b>'.$acum.'</b> - '.$updatePROCESS.'<BR>'.$schimbare;
+					if(!$update = $connect -> query("UPDATE `arhiva_dezvoltare` SET `schimbariEFECTUATE` = '$updatePROCESS', `data` = '$datetime' WHERE DATE(`data`) = '$azi'"))
+					{
+						$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+						require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+						mysqli_close($connect);
+					}
+					if(!$readUPDATES = $connect -> query("SELECT * FROM `arhiva_dezvoltare` ORDER BY `data` DESC"))
+					{
+						$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+						require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+						mysqli_close($connect);
+					}
+					if(mysqli_num_rows($readUPDATES) > 0)
+					{
+						$desfasuratorDEV = '<DIV><TABLE STYLE = "WIDTH: 99%; FONT-SIZE: 0.9vw; BORDER: 2px SOLID BLACK; MARGIN: 0 AUTO; MARGIN-TOP: 1VW;">
+											<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; WIDTH: 20%; BORDER: 1px SOLID BLACK;">DATA</TH>
+											<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; BORDER: 1px SOLID BLACK;">OPERATIUNI DE DEZVOLTARE EFECTUATE</TH><TR>';
+						while($readUPDATESrow = $readUPDATES -> fetch_assoc())
+						{
+							$updateDATA = date('d M Y - H:i',strtotime($readUPDATESrow['data']));
+							$updateREAD = $readUPDATESrow['schimbariEFECTUATE'];
+							$desfasuratorDEV = $desfasuratorDEV.'<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK;">'.$updateDATA.'</TD>
+																	<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK; TEXT-ALIGN: LEFT;">'.$updateREAD.'</TD><TR>';
+						}
+						$desfasuratorDEV = $desfasuratorDEV.'</TABLE></DIV>';
+					}
+				}
+				else
+				{
+					$updatePROCESS = '<b>'.$acum.'</b> - '.$updatePROCESS;
+					if(!$update = $connect -> query("INSERT INTO `arhiva_dezvoltare` VALUES('','$updatePROCESS','$datetime')"))
+					{
+						$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+						require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+						mysqli_close($connect);
+					}
+					if(!$readUPDATES = $connect -> query("SELECT * FROM `arhiva_dezvoltare` ORDER BY `data` DESC"))
+					{
+						$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+						require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+						mysqli_close($connect);
+					}
+					if(mysqli_num_rows($readUPDATES) > 0)
+					{
+						$desfasuratorDEV = '<DIV><TABLE STYLE = "WIDTH: 99%; FONT-SIZE: 0.9vw; BORDER: 2px SOLID BLACK; MARGIN: 0 AUTO; MARGIN-TOP: 1VW;">
+											<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; WIDTH: 20%; BORDER: 1px SOLID BLACK;">DATA</TH>
+											<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; BORDER: 1px SOLID BLACK;">OPERATIUNI DE DEZVOLTARE EFECTUATE</TH><TR>';
+						while($readUPDATESrow = $readUPDATES -> fetch_assoc())
+						{
+							$updateDATA = date('d M Y - H:i',strtotime($readUPDATESrow['data']));
+							$updateREAD = $readUPDATESrow['schimbariEFECTUATE'];
+							$desfasuratorDEV = $desfasuratorDEV.'<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK;">'.$updateDATA.'</TD>
+																	<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK; TEXT-ALIGN: LEFT;">'.$updateREAD.'</TD><TR>';
+						}
+						$desfasuratorDEV = $desfasuratorDEV.'</TABLE></DIV>';
+					}
 				}
 			}
 			else
 			{
-				require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
-			    $readUPDATES = "SELECT * FROM `arhiva_dezvoltare` ORDER BY `data` DESC";
-				if($readUPDATESrun = mysql_query($readUPDATES))
+				require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+			    if(!$readUPDATES = $connect -> query("SELECT * FROM `arhiva_dezvoltare` ORDER BY `data` DESC"))
 				{
-				    if(mysql_num_rows($readUPDATESrun) > 0)
-				    {
-						$desfasuratorDEV = '<DIV><TABLE STYLE = "WIDTH: 99%; FONT-SIZE: 0.9vw; BORDER: 2px SOLID BLACK; MARGIN: 0 AUTO; MARGIN-TOP: 1VW;">
-                                                <TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; WIDTH: 20%; BORDER: 1px SOLID BLACK;">DATA</TH>
-								  				<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; BORDER: 1px SOLID BLACK;">OPERATIUNI DE DEZVOLTARE EFECTUATE</TH><TR>';
-					    while($readUPDATESrow = mysql_fetch_assoc($readUPDATESrun))
-					    {
-							$updateDATA = date('d M Y - H:i',strtotime($readUPDATESrow['data']));
-						    $updateREAD = $readUPDATESrow['schimbariEFECTUATE'];
-						    $desfasuratorDEV = $desfasuratorDEV.'<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK;">'.$updateDATA.'</TD>
-							                                       <TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK; TEXT-ALIGN: LEFT;">'.$updateREAD.'</TD><TR>';
-					    }
-					    $desfasuratorDEV = $desfasuratorDEV.'</TABLE></DIV>';
-				    }
-				}
-				else
-				{
-					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 					require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+					mysqli_close($connect);
+				}
+				if(mysqli_num_rows($readUPDATES) > 0)
+				{
+					$desfasuratorDEV = '<DIV><TABLE STYLE = "WIDTH: 99%; FONT-SIZE: 0.9vw; BORDER: 2px SOLID BLACK; MARGIN: 0 AUTO; MARGIN-TOP: 1VW;">
+											<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; WIDTH: 20%; BORDER: 1px SOLID BLACK;">DATA</TH>
+											<TH STYLE = "FONT-SIZE: 1.2VW; FONT-WEIGHT: BOLD; BORDER: 1px SOLID BLACK;">OPERATIUNI DE DEZVOLTARE EFECTUATE</TH><TR>';
+					while($readUPDATESrow = $readUPDATES -> fetch_assoc())
+					{
+						$updateDATA = date('d M Y - H:i',strtotime($readUPDATESrow['data']));
+						$updateREAD = $readUPDATESrow['schimbariEFECTUATE'];
+						$desfasuratorDEV = $desfasuratorDEV.'<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK;">'.$updateDATA.'</TD>
+																<TD STYLE = "FONT-SIZE: 0.7VW; BORDER: 1px SOLID BLACK; TEXT-ALIGN: LEFT;">'.$updateREAD.'</TD><TR>';
+					}
+					$desfasuratorDEV = $desfasuratorDEV.'</TABLE></DIV>';
 				}
 			}
 			if(isset($_POST['genderSELECT']) && $_POST['genderSELECT'] != '')
 			{
 				$gender = $_POST['genderSELECT'];
-				require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
-			    $genCHK = "SELECT `gender`, `nivel_ACCES` FROM `utilizatori` WHERE `username` = '$user'";
-			    if($genRUN = mysql_query($genCHK))
-			    {
-				    if(mysql_num_rows($genRUN) > 0)
-				    {
-					    $genROW = mysql_fetch_assoc($genRUN);
-					    $genDB = $genROW['gender'];
-					    $acces = $genROW['nivel_ACCES'];
-					    if($acces == "ADMIN" || $acces == "DEVELOPER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>- creere cont utilizator nou<BR>- recuperari parole<BR>- schimbare parola personala<BR>- modificare username utilizatori";
-					    else if($acces == "USER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>-schimbare parola personala";
-					    else if($acces == "GUEST") $accesDETAILS = "- vizionare rapoarte<BR>- schimbare parola personala";
-					    if($gender != $genDB)
-					    {
-						    $genUPDATE = "UPDATE `utilizatori` SET `gender` = '$gender' WHERE `username` = '$user'";
-						    if($genURUN = mysql_query($genUPDATE))
-						    {
-							    if($gender == 0) $genName = 'Feminin';
-							    else if($gender == 1) $genName = 'Masculin';
-							    else if($gender == 2) $genName = 'Nu conteaza';
-						    }
-						    else
-							{
-								$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
-								require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
-							}
-					    }
-				    }
-				    else echo '<SCRIPT>alert("No data found for '.$user.'");</SCRIPT>';
-			    }
-                else
+				require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+			    if(!$genCHK = $connect -> query("SELECT `gender`, `nivel_ACCES` FROM `utilizatori` WHERE `username` = '$user'"))
 				{
-					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 					require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+					mysqli_close($connect);
 				}
+			    if(mysqli_num_rows($genCHK) > 0)
+				{
+					$genROW = $genCHK -> fetch_assoc();
+					$genDB = $genROW['gender'];
+					$acces = $genROW['nivel_ACCES'];
+					if($acces == "ADMIN" || $acces == "DEVELOPER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>- creere cont utilizator nou<BR>- recuperari parole<BR>- schimbare parola personala<BR>- modificare username utilizatori";
+					else if($acces == "USER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>-schimbare parola personala";
+					else if($acces == "GUEST") $accesDETAILS = "- vizionare rapoarte<BR>- schimbare parola personala";
+					if($gender != $genDB)
+					{
+						if(!$genUPDATE = $connect -> query("UPDATE `utilizatori` SET `gender` = '$gender' WHERE `username` = '$user'"))
+						{
+							$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
+							require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+							mysqli_close($connect);
+						}
+						if($gender == 0) $genName = 'Feminin';
+						else if($gender == 1) $genName = 'Masculin';
+						else if($gender == 2) $genName = 'Nu conteaza';
+					}
+				}
+				else echo '<SCRIPT>alert("No data found for '.$user.'");</SCRIPT>';
 			}
 			else
 			{
-			    require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
-				$userDATA = "SELECT `gender`, `nivel_ACCES` FROM `utilizatori` WHERE `username` = '$user'";
-				if($userDATArun = mysql_query($userDATA))
+			    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+				if(!$userDATA = $connect -> query("SELECT `gender`, `nivel_ACCES` FROM `utilizatori` WHERE `username` = '$user'"))
 				{
-				    if(mysql_num_rows($userDATArun) > 0)
-				    {
-					    $userDATArow = mysql_fetch_assoc($userDATArun);
-					    $gender = $userDATArow['gender'];
-					    $acces = $userDATArow['nivel_ACCES'];
-					    if($acces == "ADMIN" || $acces == "DEVELOPER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>- creere cont utilizator nou<BR>- recuperari parole<BR>- schimbare parola personala<BR>- modificare username utilizatori";
-					    else if($acces == "USER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>-schimbare parola personala";
-					    else if($acces == "GUEST") $accesDETAILS = "- vizionare rapoarte<BR>- schimbare parola personala";
-				    }
-				    else echo '<SCRIPT>alert("No data found for '.$user.'");</SCRIPT>';
-				}
-                else
-				{
-					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 					require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+					mysqli_close($connect);
 				}
+				if(mysqli_num_rows($userDATA) > 0)
+				{
+					$userDATArow = $userDATA -> fetch_assoc();
+					$gender = $userDATArow['gender'];
+					$acces = $userDATArow['nivel_ACCES'];
+					if($acces == "ADMIN" || $acces == "DEVELOPER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>- creere cont utilizator nou<BR>- recuperari parole<BR>- schimbare parola personala<BR>- modificare username utilizatori";
+					else if($acces == "USER") $accesDETAILS = "- vizionare rapoarte<BR>- efectuare tranzactii(eliberari produse, imprumut produse, receptionare produse, storno produse, returnari produse)<BR>-schimbare parola personala";
+					else if($acces == "GUEST") $accesDETAILS = "- vizionare rapoarte<BR>- schimbare parola personala";
+				}
+				else echo '<SCRIPT>alert("No data found for '.$user.'");</SCRIPT>';
 			}
 		    require 'C:\xampp\htdocs\ramira\magazie\header.php';
 			require 'C:\xampp\htdocs\ramira\magazie\meniu.principal.php';
@@ -259,17 +232,14 @@
 		    {
 				$oldpass = $_POST['oldpass'];
 				$newPASS = $_POST['newpass'];
-			    $updatePass = "UPDATE `utilizatori` SET `password` = '$newPASS' WHERE `username` = '$user'";
-			    if($passRUN = mysql_query($updatePass))
-			    {
-					$oldpass = ''; $newPASS = ''; $newpassrepeat = '';
-				    echo "<SCRIPT>window.location = '/ramira/magazie/index.php/';</SCRIPT>";
-			    }
-			    else
+			    if(!$updatePass = $connect -> query("UPDATE `utilizatori` SET `password` = '$newPASS' WHERE `username` = '$user'"))
 				{
-					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysql_error().'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysql_error().'">warehouse-soft@ramira.ro</a>';
+					$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
 					require 'C:\xampp\htdocs\ramira\magazie\error.handler.php';
+					mysqli_close($connect);
 				}
+			    $oldpass = ''; $newPASS = ''; $newpassrepeat = '';
+				echo "<SCRIPT>window.location = '/ramira/magazie/index.php/';</SCRIPT>";
 		    }
 		
 		?>

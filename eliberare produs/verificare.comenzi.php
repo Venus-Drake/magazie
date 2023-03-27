@@ -1,7 +1,8 @@
 <?PHP
 
-require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 //AM DESCHIS PAGINA NOUA; INCA NU AM INTRODUS NICI O DATA. VERIFICAM EXISTENTA VREUNEI COMENZI RAMASA DESCHISA.
+$worker = (string) $worker;
 if(empty($worker) || $worker == 'NUME ANGAJAT')
 {
 	if(!$chk = $connect -> query("SELECT `nume`, `marca`, `sectia`, `data`, `ora` FROM `bon_consum_tmp` WHERE `processed` = '0'"))

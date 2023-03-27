@@ -132,7 +132,7 @@
 		    <SELECT ONCHANGE = "this.form.submit()" CLASS = "SITUATII" STYLE = "FONT-WEIGHT: BOLD;" NAME = "clasa">
 		        <OPTION ALIGN = CENTER STYLE = "FONT-WEIGHT: BOLD" VALUE = <?php echo $clasa;?>>SITUATIE PE GRUPE SCULE SI PRODUSE</OPTION>
 		        <?php
-		            require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+		            require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 		            if(!$grup = $connect -> query("SELECT `grupa_MAT` FROM `magazie` GROUP BY `grupa_MAT` ORDER BY `grupa_MAT`"))
 					{
 	                	mysqli_close($connect);

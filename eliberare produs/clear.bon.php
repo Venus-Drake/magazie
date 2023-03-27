@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 if(isset($_GET['agreed_bon']) && !empty($_GET['agreed_bon'])) $marcadel = $_GET['agreed_bon'];
 else echo 'Nu avem nici o marca inregistrata pentru bon.';
 

@@ -101,7 +101,7 @@ global $nume;
         <!--AICI FACEM UN BUILD AL MAGAZIEI. FOARTE POSIBIL SA NU MAI FIE NECESAR PE VIITOR...DAR PANA ATUNCI, EU AM NEVOIE DE EL.-->
         <?PHP
 		    //EXTRAGEM PRODUSELE DIN TABELUL magazie SI VERIFICAM DACA LE AVEM IN magazie_stoc; DACA NU LE AVEM, LE ADAUGAM. FAC SI NISTE STOCURI EMPIRICE, CU OCAZIA ASTA.
-		    require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+		    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 		    echo '<BR><BR><BR><CENTER><B><U>STOC MAGAZIE IN '.$datetime.'</U></B><BR><BR>';
 		    if(!$mag = $connect -> query("SELECT * FROM `magazie` GROUP BY `cod_sap` ORDER BY `cod_sap`"))
 			{die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysqli_error($connect).'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');}
@@ -150,7 +150,7 @@ global $nume;
 						else if($pret >= 50 && $pret < 500) $cantitate = rand(50,300);
 						else if($pret >= 1 && $pret < 50) $cantitate = rand(100,500);
 						else $cantitate = rand(200,1000);
-						if(!$magadd = $connect -> query("INSERT INTO `magazie_stoc` VALUES('','$denumire','$cantitate','$unit_mas','$furnizor','$magazie','$cod_sap','$grupa_mat','$pret','Added $datetime')"))
+						if(!$magadd = $connect -> query("INSERT INTO `magazie_stoc` VALUES('','$denumire','$cantitate','$unit_mas','$furnizor','$magazie','$cod_sap','$grupa_mat','$pret','Added (string)$datetime')"))
 						{die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED;">MYSQL ERROR!!<BR>' . __LINE__ . '. ' . __FILE__ . '<BR>' . mysqli_error($connect) . '<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');}
 						$nrcrt++;
 						echo '<TR CLASS = "ROW"><TD>'.$nrcrt.'</TD><TD>'.$cod_sap.'</TD><TD>'.$denumire.'</TD><TD>'.$cantitate.'</TD><TD>'.$unit_mas.'</TD><TD>'.$magazie.'</TD><TD>'.$grupa_mat.'</TD><TD>'.$pret.'</TD><TD>'.$furnizor.'</TD><TD>'.$observatii.'</TD>';

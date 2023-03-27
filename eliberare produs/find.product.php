@@ -3,7 +3,7 @@
 if(isset($_POST['product']) && !empty($_POST['product']))
 {
 	$SAPcode = $_POST['product'];
-	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+	require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	if(!$pchk = $connect -> query("SELECT `denumire`, `cod_SAP` FROM `magazie_stoc` WHERE `cod_SAP` LIKE '$SAPcode%'"))
 	{
 		die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));

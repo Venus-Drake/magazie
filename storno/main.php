@@ -64,6 +64,9 @@ $product = (string) $product;
 $furnizor = (string) $furnizor;
 $observatii = (string) $observatii;
 $action = (string) $action;
+$marca = (string) $marca;
+$worker = (string) $worker;
+$nume = (string) $nume;
 
 ?>
 

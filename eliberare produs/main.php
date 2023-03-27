@@ -79,6 +79,7 @@
         global $furnizor;
         global $stornoAmount;
         global $observatii;
+        $amount = (string) $amount;
 			require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';
 		?>
 	   <DIV CLASS = "LEFT_BAR"><BR><BR>
@@ -168,7 +169,7 @@
 		   </DIV>
 	   </DIV>
 	   <DIV ID = "bon_magazie" CLASS = "bon_magazie">
-	       <IFRAME ID = "bonFRAME" SRC = "/ramira/magazie/eliberare produs/bon.magazie.php?nume=<?php echo $nume;?>&rekrow=<?php echo $marca?>&angajat=<?php echo $worker?>&sectia=<?php echo $sectia?>" CLASS = "bon_magazie_frame"></IFRAME>
+	       <IFRAME ID = "bonFRAME" SRC = "/ramira/magazie/eliberare produs/bon.magazie.php?nume=<?php echo $nume;?>&rekrow=<?php echo $marca?>&angajat=<?php echo $worker?>&sectia=<?php echo (string)$sectia?>" CLASS = "bon_magazie_frame"></IFRAME>
        </DIV>
     </DIV>
     

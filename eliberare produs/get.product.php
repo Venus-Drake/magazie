@@ -6,7 +6,7 @@ $other = '-';
 if(isset($_POST['prodCHK']) && !empty($_POST['prodCHK']))
 {
     $codSAP = $_POST['prodCHK'];
-    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(!$que = $connect -> query("SELECT `denumire`, `cantitate`,`unit_mas`,`detalii`,`stare_transfer` FROM `magazie_uzate` WHERE `cod_sap` = '$codSAP' AND `stare_transfer` != 'Pentru reascutire'"))
 	{
 		die(__LINE__ . '. MySQL error in ' . __FILE__ . ': ' . mysqli_error($connect));
@@ -56,7 +56,7 @@ else if(isset($_POST['codSAP']) && $_POST['codSAP'] != '')
 {
 	$grabSAP = $_POST['codSAP'];
 	if(isset($_POST['marca']) && $_POST['marca'] != '') $marca = $_POST['marca'];
-	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+	require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(!$wchk = $connect -> query("SELECT `denumire`, `cantitate`, `UM`, `furnizor` FROM `magazie_stoc` WHERE `cod_SAP` LIKE '$grabSAP' ORDER BY 'lastRECEIVED' DESC"))
 	{
 		die(__LINE__ . '. MySQL error in ' . __FILE__ . ': ' . mysqli_error($connect));	

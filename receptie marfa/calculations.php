@@ -4,7 +4,7 @@
     {
 	    $cantOPT = $_POST['cantOPT'];
 	    $sapCODE = $_POST['sapcode'];
-        require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+        require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
         if(!$chk = $connect -> query("SELECT `cantitate.minima`, `cantitate.optima` FROM `magazie_stoc` WHERE `cod_SAP` = '$sapCODE'"))
 		{
 			echo __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect);
@@ -42,7 +42,7 @@
     {
 	    $cantMIN = $_POST['cantMIN'];
 	    $sapCODE = $_POST['sapcode'];
-        require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+        require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
         if(!$chk = $connect -> query("SELECT `cantitate.optima` FROM `magazie_stoc` WHERE `cod_SAP` = '$sapCODE'"))
 		{
 			echo __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect);
@@ -81,7 +81,7 @@
     {
 	    $sapCODE = $_POST['stocSUM'];
 	    $amount = $_POST['amountSUM'];
-	    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+	    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	    if(!$que = $connect -> query("SELECT `cantitate` FROM `magazie_stoc` WHERE `cod_SAP` = '$sapCODE'"))
 		{
 			echo __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect);

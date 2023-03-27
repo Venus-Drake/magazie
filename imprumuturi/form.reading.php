@@ -6,6 +6,7 @@
 <?PHP
 
 //VERIFICAM DACA S-A INTRODUS CEVA DATA IN FORMULAR SI O PROCESAM, LA NEVOIE
+//echo __FILE__.' been requested in: '.$_SERVER['SCRIPT_FILENAME'];
 
 global $worker;
 global $furnizor;
@@ -15,7 +16,6 @@ global $SAPcode;
 global $marca;
 global $sectia;
 global $size;
-global $endDate;
 
 $motiv = 'Uz temporar';
 $price = '0.00';

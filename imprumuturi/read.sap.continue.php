@@ -4,6 +4,8 @@ $worker = (string) $worker;
 $readSTOCK = (string)$readSTOCK;
 $readPRICE = (string) $readPRICE;
 $readMOTIV = (string) $readMOTIV;
+$readFURNIZOR = (string) $readFURNIZOR;
+
 
     if($readrow['end.loan'] != $endLOAN || $readrow['motiv'] != $readMOTIV || $readrow['furnizor'] != $readFURNIZOR || $readrow['price'] != $readPRICE || $readrow['observatii'] != $readObs)
     {

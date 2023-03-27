@@ -5,20 +5,17 @@
 		$pass = $_GET['oldINPUT'];
 		if($_GET['user'] != '') $user = $_GET['user'];
 		else echo 'User not set!';
-		require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-		$chkold = "SELECT `password` FROM `utilizatori` WHERE `username` = '$user'";
-		if($chkrun = mysql_query($chkold))
+		require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+		if(!$chkold = $connect -> query("SELECT `password` FROM `utilizatori` WHERE `username` = '$user'")) {
+		die(__LINE__ . '. MySQL Error!');}
+		if(mysqli_num_rows($chkold) > 0)
 		{
-		    if(mysql_num_rows($chkrun) > 0)
-			{
-				$chkrow = mysql_fetch_assoc($chkrun);
-				$chkpass = $chkrow['password'];
-				if($pass == $chkpass) echo 'OK';
-				else echo 'Parola veche gresita!';
-			}
-			else echo $user.' not found!';
+			$chkrow = $chkold -> fetch_assoc();
+			$chkpass = $chkrow['password'];
+			if($pass == $chkpass) echo 'OK';
+			else echo 'Parola veche gresita!';
 		}
-		else echo 'MySQL Error!';
+		else echo $user.' not found!';
 	}
     else echo 'Parola gresita';
 

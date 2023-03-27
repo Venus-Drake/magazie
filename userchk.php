@@ -1,7 +1,7 @@
 <?php
 
     global $barcode; global $userGot;
-    require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(isset($_GET['barcode']) && !empty($_GET['barcode'])) 
 	{
 		$barcode = $_GET['barcode'];

@@ -1,9 +1,9 @@
 <SCRIPT src='/ramira/magazie/eliberare produs/eliberare.script.js'></SCRIPT>
 <?php
 
-global $marca;
+$marca = (string)$marca;
 
-require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 
 if($marca != '')
 {

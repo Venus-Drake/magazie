@@ -5,7 +5,7 @@ global $marca;
 
 if($endMaxDate == 0) $endMaxDate = $endDate;
 
-require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 if(!$serialGrab = $connect -> query("SELECT `nr.crt`, `serial.nr`, `end.loan` FROM `magazie_imprumuturi` WHERE `marca` = '$marca' AND `order.closed` = '0' ORDER BY `end.loan` DESC"))
 {
 	$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';

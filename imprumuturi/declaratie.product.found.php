@@ -2,6 +2,8 @@
 
 global $motiv;
 global $observatii;
+$price = (float) $price;
+$nume = (string) $nume;
 
     $addrow = $loanchk -> fetch_assoc();
     $sapread = $addrow['sap.code'];
@@ -10,7 +12,7 @@ global $observatii;
     $priceREAD = $addrow['price'];
 	$valBon = $addrow['val.tot'];
 	//VERIFICAM CANTITATEA PE CARE O AVEM PE STOC, INAINTE DE TOATE, IN MAGAZIE_STOC
-	if(!$qSTOCKchk = $connect -> query("SELECT `cantitate` FROM `magazie_stoc` WHERE `furnizor` = '$furnizorREAD' AND `cod_SAP` = '$SAPcode' AND `pret` = '$price'"))
+	if(!$qSTOCKchk = $connect -> query("SELECT `cantitate` FROM `magazie_stoc` WHERE `furnizor` = '$furnizorREAD' AND `cod_SAP` = '$SAPcode' AND `pret` = $price"))
 	{
 		$mailerror = '<FONT STYLE = "FONT-SIZE: 1.5vw"><center><b>FATAL ERROR!<BR>Something unexpected went wrong!<BR>MySQL Error:<BR>'.__LINE__.". ".__FILE__.":<br>".mysqli_error($connect).'<br>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong! '.mysqli_error($connect).'">warehouse-soft@ramira.ro</a></FONT>';
 		require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/error.handler.php';

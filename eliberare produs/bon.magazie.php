@@ -27,7 +27,6 @@
 	$valtot = '0.00';
 	$worker = 'NUME ANGAJAT';
 	$marca = 'NR. MARCA';
-	$sectia = '<FONT STYLE = "TEXT-DECORATION: UNDERLINE DOTTED;"><I>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSECTIA&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</i></font>';
 	if(isset($_GET['nume']) && !empty($_GET['nume'])) $nume = $_GET['nume'];
 	else $nume = "Unknown User";
 	if(isset($_GET['angajat']) && !empty($_GET['angajat'])) 
@@ -54,10 +53,17 @@
 	?>
 
     <DIV STYLE = "WIDTH: 100%; MARGIN: 20px AUTO; BACKGROUND-COLOR: WHITE;">
-        <DIV STYLE = "WIDTH: 99%;">
+        <DIV STYLE = "WIDTH: 99%; FLOAT: NONE; MARGIN: 0 AUTO;">
   		    <IMG SRC = "logo.jpg" STYLE = "WIDTH: 18vw; HEIGHT:4.5vw; MARGIN-TOP: 1.3vw; MARGIN-RIGHT: 1.3vw; MARGIN-BOTTOM: 1.3vw;">
-        	<B><CENTER><FONT STYLE = "FONT-SIZE: 2.5vw">BON DE CONSUM MAGAZIE</FONT><BR>Seria: <SPAN ID = "seriaBON"><?php echo $seria;?></SPAN></CENTER><BR><BR><BR></CENTER><LEFT><FONT STYLE = "FONT-SIZE: 1.5VW">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Se elibereaza catre <SPAN ID = "numeANGAJATbon" STYLE = "BORDER-BOTTOM: 1PX DOTTED BLACK; MIN-WIDTH: 20vw; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"> </SPAN> (marca: <SPAN ID = "marcaANGAJATbon" STYLE = "BORDER-BOTTOM: 1PX DOTTED BLACK; MIN-WIDTH: 7vw; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"></SPAN>), angajat al sectiei <SPAN ID = "sectiaBON" STYLE = "BORDER-BOTTOM: 1PX DOTTED BLACK; MIN-WIDTH: 7vw; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"></SPAN>, urmatoarele produse:<BR><BR>
-			    <TABLE WIDTH = 100% STYLE = "BORDER: 2px SOLID BLACK; TEXT-ALIGN: CENTER;">
+        	<B><CENTER><FONT STYLE = "FONT-SIZE: 2.5vw">BON DE CONSUM MAGAZIE</FONT><BR>Seria: <SPAN ID = "seriaBON"><?php echo $seria;?></SPAN></CENTER><BR><BR><BR>
+			<LEFT><FONT STYLE = "FONT-SIZE: 1.5VW">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Se elibereaza catre 
+				<SPAN ID = "numeANGAJATbon" STYLE = "BORDER-BOTTOM: 1PX DOTTED BLACK; MIN-WIDTH: 20vw; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"> </SPAN> 
+				(marca: 
+				<SPAN ID = "marcaANGAJATbon" STYLE = "BORDER-BOTTOM: 1PX DOTTED BLACK; MIN-WIDTH: 7vw; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"></SPAN>
+				), angajat al sectiei 
+				<SPAN ID = "sectiaBON" STYLE = "BORDER-BOTTOM: 1PX DOTTED BLACK; MIN-WIDTH: 7vw; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"></SPAN>
+				, urmatoarele produse:<BR><BR>
+			    <TABLE WIDTH = 100% STYLE = "BORDER: 2px SOLID BLACK; TEXT-ALIGN: CENTER; MARGIN: 0 AUTO;">
 		            <TD>
 		                <TABLE ID = "bon.magazie" WIDTH = 100% BORDER = 1 ALIGN = CENTER>
 		                    <TR>

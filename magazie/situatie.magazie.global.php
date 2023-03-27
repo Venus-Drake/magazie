@@ -8,7 +8,7 @@
 
 global $clasa;
 
-require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 if ($clasa == 'GENERALA') {
 	if(!$stoc = $connect -> query("SELECT * FROM `magazie_stoc` ORDER BY `cod_SAP`"))
 	{

@@ -14,6 +14,7 @@
    	$readAMOUNT = $readrow['amount'];
    	$readUM = $readrow['unitate.mas'];
    	$readObs = $readrow['observatii'];
+$worker = (string) $worker;
    	if($readrow['stoc.final'] == ($readSTOCK - $readAMOUNT)) $readSTOCKend = $readrow['stoc.final'];
    	else 
  	{

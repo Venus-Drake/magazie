@@ -5,10 +5,11 @@ global $product;
 global $furnizor;
 global $stornoAmount;
 global $observatii;
+$sectia = (string) $sectia;
 
 $SAPcode = (string) $SAPcode;
 
-    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(!$casget = $connect -> query("SELECT `cantitate`, `tip.miscare` FROM `arhiva_miscari_magazie` WHERE `marca` = '$marca' AND `cod.SAP` = '$SAPcode'"))
 	{
 		$mailerror = 'MYSQL ERROR<br><font size = 2>'.__LINE__.'. '.__FILE__.'<BR>'.mysqli_error($connect);

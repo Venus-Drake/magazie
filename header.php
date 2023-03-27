@@ -11,7 +11,7 @@
 	if(isset($_POST['mailtoME']) && $_POST['mailtoME'] != '')
 	{
 		$mailerror = $_POST['mailtoME'];
-		require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+		require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	    if(!$erradd = $connect -> query("INSERT INTO `error.warnings` VALUES('','$mailerror','1','0','$datetime')"))
 		{
 			$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong:<BR>'.mysqli_error($connect).'<BR>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong:<BR>'.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';
@@ -24,7 +24,7 @@
 	if(isset($_POST['mailtoME2']) && $_POST['mailtoME2'] != '')
 	{
 		$warning = $_POST['mailtoME2'];
-		require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+		require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	    if(!$erradd = $connect -> query("INSERT INTO `error.warnings` VALUES('','$warning','0','0','$datetime')"))
 		{
 			$mailerror = '<font size = 5><center><b>FATAL ERROR!<BR>Something unexpected went wrong:<BR>'.mysqli_error($connect).'<BR>Please, contact program administrator at<br><a href = "mailto: warehouse-soft@ramira.ro?subject=Fatal error feedback&body=The program has returned the next fatal error: '.__LINE__.'. '.__FILE__.': Something unexpected went wrong:<BR>'.mysqli_error($connect).'">warehouse-soft@ramira.ro</a>';

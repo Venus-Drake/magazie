@@ -7,7 +7,7 @@ if(isset($_GET['marca']) && !empty($_GET['marca']))
 }
 else echo 'Eroare!! Marca nu este setata!';
 
-require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 
 global $num;
 

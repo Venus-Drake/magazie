@@ -1,6 +1,6 @@
 <?php
 
-require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 if ($magazie != 0)
 	$magazie = (string) $magazie;
 if(!$stoc = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `magazie` = '$magazie' ORDER BY `cod_SAP`"))

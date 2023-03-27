@@ -7,7 +7,7 @@
 <?php
 
 //ECHO '<TD>ACUM AR TREBUI SA EXTRAGEM DIN MAGAZIE STOC, TOT CE AVEM SI CUM. <BR> HAI SA VEDEM!</TD>';
-require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 if(!$stoc = $connect -> query("SELECT * FROM `magazie_stoc` WHERE `magazie` = 'A' ORDER BY `cod_SAP`"))
 {
 	echo '<DIALOG OPEN ID = "errdia" STYLE = "COLOR: RED; BACKGROUND-COLOR: BLACK;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysqli_error($connect).'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>';

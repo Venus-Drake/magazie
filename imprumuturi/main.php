@@ -18,6 +18,8 @@
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
     require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/imprumuturi/form.reading.php';
 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/meniu.principal.php';
+	$date = (string) $date;
+$nume = (string) $nume;
 	
 
 ?>

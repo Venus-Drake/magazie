@@ -28,7 +28,7 @@
 		    <DIV ID = "declarationINTRO" STYLE = "MARGIN: 0 AUTO; WIDTH: 100%;">
 		        <IMG SRC = "logo.jpg" STYLE = "WIDTH: 18vw; HEIGHT:4.5vw; MARGIN-TOP: 1.3vw; MARGIN-RIGHT: 1.3vw; MARGIN-BOTTOM: 1.3vw;"><BR>
 		        <B><CENTER><FONT STYLE = "FONT-SIZE: 2.5vw">NOTA INTRARE RECEPTIE</FONT>
-				    <FONT STYLE = "FONT-SIZE: 1.3vw;"><br>Seria: <?php echo $seria; ?><DIV ID = "seriaNOTA" STYLE = "DISPLAY: NONE;"><?php echo $seria; ?></DIV> / <?php echo $date;?><DIV STYLE = "DISPLAY: NONE;" ID = "dataNOTA"><?php echo $date;?></DIV></CENTER></FONT>
+				    <FONT STYLE = "FONT-SIZE: 1.3vw;"><br>Seria: <?php echo $seria; ?><DIV ID = "seriaNOTA" STYLE = "DISPLAY: NONE;"><?php echo $seria; ?></DIV> / <?php $date = (string) $date; echo $date; ?><DIV STYLE = "DISPLAY: NONE;" ID = "dataNOTA"><?php $date = (string) $date; echo $date;?></DIV></CENTER></FONT>
 				<BR><BR><BR>
 				<DIV STYLE = "WIDTH: MAX-CONTENT; FLOAT: LEFT;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSe primesc de la&nbsp&nbsp</DIV>
 				<DIV ID = "furnizorFRAME" STYLE = "WIDTH: MAX-CONTENT; FLOAT: LEFT;">

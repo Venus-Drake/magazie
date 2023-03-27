@@ -110,7 +110,7 @@ $nume = (string) $nume;
     <DIV CLASS = "DISPLAY">
         <!--EXTRAGEM FURNIZORII, PENTRU A FOLOSI, PE VIITOR, DATELE FIECARUIA, CU CE PRODUSE AU SI LA CE PRETURI, ETC...-->
         <?PHP
-		    require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+		    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 		    echo '<BR><BR><BR><CENTER><B><U>GRUPE MATERIALE LA '.$datetime.'</U></B><BR><BR>';
 		    if(!$mag = $connect -> query("SELECT `grupa_MAT` FROM `magazie` GROUP BY `grupa_MAT` ORDER BY `grupa_MAT`"))
 			{die('<DIALOG OPEN ID = "errdia" STYLE = "COLOR: WHITE; BACKGROUND-COLOR: RED; WIDTH: 400px; BORDER: 3px SOLID BLACK; OVERFLOW-WRAP: BREAK-WORD;">MYSQL ERROR!!<BR>'.__LINE__.'. '.__FILE__.'<BR>'.mysqli_error($connect).'<BR><BUTTON CLASS = "OK" ID = "cancel" ONCLICK = "closeDialog()"><B>OK</BUTTON><DIALOG>');}

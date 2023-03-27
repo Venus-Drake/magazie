@@ -4,6 +4,11 @@ global $furnizor;
 global $motiv;
 global $product;
 global $observatii;
+$worker = (string) $worker;
+$nume = (string) $nume;
+$sectia = (string) $sectia;
+
+$datetime = (string) $datetime;
 
     //VERIFICAM DACA NU MAI AVEM PRODUSUL IN DECLARATIE, CU ALTA DATA/ MOTIV/ OBSERVATII ETC.
     if(!$decPRODchk = $connect -> query("SELECT * FROM `magazie_imprumuturi` WHERE `furnizor` = '$furnizor' AND `sap.code` = '$SAPcode' AND `price` = '$price' ORDER BY `stoc` DESC"))

@@ -83,7 +83,7 @@
   			if(isset($_GET['pass']) && $_GET['pass'] != '') 
   			{
 				$pass = $_GET['pass'];
-                require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+                require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	 			if($que = $connect -> query("SELECT * FROM `utilizatori` WHERE `username` = '$user' AND `password` = '$pass'"))
 	 			{
 				    if(mysqli_num_rows($que) != 0)
@@ -152,7 +152,7 @@
 		        </FORM>
 		    </DIV>';
     ?>
-	<DIV STYLE = "POSITION: FIXED; BOTTOM: 0; HEIGHT: 3VH; background-color: red; width: 100%;"> Programul este in reconstructie! Se trece structura de la MYSQL la MYSQLI.</DIV>
+	<DIV STYLE = "POSITION: FIXED; BOTTOM: 0; HEIGHT: 3VH; background-color: yellow; width: 100%; font-size: 1vw; font-weight: bold; text-align: center;"> Schimbarea structurii in MySQLI s-a efectuat cu succes. Va rog, raportati orice eventuala eroare aparuta, pentru a putea fi solutionata!</DIV>
 
 
 

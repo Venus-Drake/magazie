@@ -25,36 +25,28 @@
 		$cantMIN = $_POST['cantMIN'];
 		$cantOPT = $_POST['cantOPT'];
 		$dataRECEPTIE = date('Y-m-d h:i:s', strtotime($dataNOTA.' '.$hour));
-		require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-		$grab = "SELECT `cantitate` FROM `magazie_stoc` WHERE `cod_SAP` = '$codSAP'";
-		if($grabRUN = mysql_query($grab))
+		require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+		if(!$grab = $connect -> query("SELECT `cantitate` FROM `magazie_stoc` WHERE `cod_SAP` = '$codSAP'"))
+		{die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));}
+		$stoc = 0;
+		if(mysqli_num_rows($grab) > 0)
 		{
-			$stoc = 0;
-			if(mysql_num_rows($grabRUN) > 0)
+			while($grabROW = $grab -> fetch_assoc())
 			{
-			    while($grabROW = mysql_fetch_assoc($grabRUN))
-			    {
-				    $stoc = $grabROW['cantitate'] + $stoc;
-			    }
-			    $stoc = $stoc + $cantitate;
+				$stoc = $grabROW['cantitate'] + $stoc;
 			}
-			$que = "INSERT INTO `arhiva_miscari_magazie` VALUES('','$serieNOTA','$gestionar','Receptie produs','','','$gestionar','0','MAGAZIE','$denumire','$codSAP','$furnizor','$factura','$dataFACT','$pret','$cantitate','$units','$stoc','$valoare','$dataNOTA','$hour','')";
-			if($run = mysql_query($que))
-			{
-				$upSTOC = "UPDATE `magazie_stoc` SET `cantitate` = `cantitate` + '$cantitate', `gestionar` = '$gestionar', `lastRECEIVED` = '$dataRECEPTIE' WHERE `size` = '$detalii' AND `furnizor` = '$furnizor' AND `cod_SAP` = '$codSAP' AND `pret` = '$pret'";
-				if($upSTOCrun = mysql_query($upSTOC))
-				{
-				    if(mysql_affected_rows() > 0)echo 'OK^'.$codSAP.'^'.$furnizor.'^'.$factura.'^'.$dataFACT.'^'.$codFURNIZOR.'^'.$denumire.'^'.$pret.'^'.$cantitate.'^'.$detalii;
-					else
-					{
-					    $inSTOC = "INSERT INTO `magazie_stoc` VALUES('','$denumire','$detalii','$cantitate','$cantMIN','$cantOPT','$units','$furnizor','$magazie','$codSAP','$codFURNIZOR','$grupa','$pret','Receptionat in $dataRECEPTIE','$dataRECEPTIE','$gestionar','0')";
-					    if($inSTOCrun = mysql_query($inSTOC))echo 'OK^'.$codSAP.'^'.$furnizor.'^'.$factura.'^'.$dataFACT.'^'.$codFURNIZOR.'^'.$denumire.'^'.$pret.'^'.$cantitate.'^'.$detalii;
-                        else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
-					}
-				}
-				else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
-			}
-			else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
+			$stoc = $stoc + $cantitate;
+		}
+		if(!$que = $connect -> query("INSERT INTO `arhiva_miscari_magazie` VALUES('','$serieNOTA','$gestionar','Receptie produs','','','$gestionar','0','MAGAZIE','$denumire','$codSAP','$furnizor','$factura','$dataFACT','$pret','$cantitate','$units','$stoc','$valoare','$dataNOTA','$hour','')"))
+		{die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));}
+		if(!$upSTOC = $connect -> query("UPDATE `magazie_stoc` SET `cantitate` = `cantitate` + '$cantitate', `gestionar` = '$gestionar', `lastRECEIVED` = '$dataRECEPTIE' WHERE `size` = '$detalii' AND `furnizor` = '$furnizor' AND `cod_SAP` = '$codSAP' AND `pret` = '$pret'"))
+		{die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));}
+		if(mysqli_affected_rows($connect) > 0)echo 'OK^'.$codSAP.'^'.$furnizor.'^'.$factura.'^'.$dataFACT.'^'.$codFURNIZOR.'^'.$denumire.'^'.$pret.'^'.$cantitate.'^'.$detalii;
+		else
+		{
+			if(!$inSTOC = $connect -> query("INSERT INTO `magazie_stoc` VALUES('','$denumire','$detalii','$cantitate','$cantMIN','$cantOPT','$units','$furnizor','$magazie','$codSAP','$codFURNIZOR','$grupa','$pret','Receptionat in $dataRECEPTIE','$dataRECEPTIE','$gestionar','0')"))
+			{die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));}
+			echo 'OK^'.$codSAP.'^'.$furnizor.'^'.$factura.'^'.$dataFACT.'^'.$codFURNIZOR.'^'.$denumire.'^'.$pret.'^'.$cantitate.'^'.$detalii;
 		}
 	}
 	else echo 'Something is terribly wrong, missy!';

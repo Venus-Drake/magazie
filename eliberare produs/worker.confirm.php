@@ -8,7 +8,7 @@ if(isset($_POST['barcode']) && !empty($_POST['barcode']))
 	if(isset($_POST['marca']) && !empty($_POST['marca'])) $marca = $_POST['marca'];
 }
 
-require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 if(!$wor = $connect -> query("SELECT `WORKER_ID` FROM `pworker` WHERE `WORKER_Barcode` = '$barcode' AND `WORKER_ID` = '$marca'"))
 {die(__LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect));}
 if(mysqli_num_rows($wor) > 0)

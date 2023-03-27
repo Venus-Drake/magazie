@@ -6,6 +6,8 @@ $SAPcode = (string) $SAPcode;
 $observatii = (string) $observatii;
 $motiv = (string) $motiv;
 $product = (string) $product;
+$price = (float) $price;
+$seria = (string) $seria;
 
     if(!$decPRODchk = $connect -> query("SELECT * FROM `declaratie_storno` WHERE `furnizor` = '$furnizor' AND `cod.SAP` = '$SAPcode' AND `valoare` = '$price'"))
 	{

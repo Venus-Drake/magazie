@@ -6,18 +6,15 @@
         if(isset($_GET['username']) && $_GET['username'] != '') 
 		{
 			$username = $_GET['username'];
-			require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
-			$que = "SELECT `IP.connect` FROM `utilizatori` WHERE `username` = '$username'";
-			if($run = mysql_query($que))
+			require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+			if(!$que = $connect -> query("SELECT `IP.connect` FROM `utilizatori` WHERE `username` = '$username'")) {
+			die(__LINE__.'. MYSQL ERROR!');}
+			if(mysqli_num_rows($que) > 0)
 			{
-			    if(mysql_num_rows($run) > 0)
-			    {
-				    $row = mysql_fetch_assoc($run);
-				    $loggedIP = $row['IP.connect'];
-                    if($loggedIP != $ipNOW) echo 'disconnect';
-			    }
+				$row = $que -> fetch_assoc($run);
+				$loggedIP = $row['IP.connect'];
+				if($loggedIP != $ipNOW) echo 'disconnect';
 			}
-			else echo 'MYSQL ERROR!';
 		}
     }
 

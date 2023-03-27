@@ -30,8 +30,9 @@
 
     <?php
         require 'C:\xampp\htdocs\ramira\magazie\header.php';
+		require_once $_SERVER['DOCUMENT_ROOT'].'/ramira/spout-3.3.0/src/Spout/Autoloader/autoload.php';
 		$iplog = $_SERVER['REMOTE_ADDR'];
-	 	require 'C:\xampp\htdocs\ramira\magazie\connect.inc.php';
+	 	require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 		if($ipchk = $connect -> query("UPDATE `utilizatori` SET `IP.connect` = '' WHERE `IP.connect` = '$iplog'")){}
 	 	else
 	 	{

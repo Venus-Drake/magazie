@@ -11,7 +11,7 @@
 <?php
     global $produs; global $cantitate; global $UM; global $detalii; global $cantMIN; global $cantOPT; global $magazie; global $grupa;
     require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
-    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
     if(isset($_GET['nume']) && $_GET['nume'] != '') $nume = $_GET['nume'];
     else echo "<SCRIPT>window.location = '/ramira/magazie/index.php/';</SCRIPT>";
     if(isset($_GET['alarm']) && $_GET['alarm'] != '') 

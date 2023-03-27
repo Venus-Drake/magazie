@@ -14,8 +14,7 @@ $price = '0.00';
 $stock = "0.00";
 $amount = '1';
 $units = 'N.A.';
-$endDate = $date;
-$endMaxDate = $endDate;
+$endMaxDate = $date;
 
 if(isset($_GET['nume']) && !empty($_GET['nume']))
 {

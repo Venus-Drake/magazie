@@ -6,8 +6,10 @@ global $furnizor;
 global $observatii;
 global $grupaMAT;
 global $masina;
-
+$sectia = (string) $sectia;
+$magazie = (string) $magazie;
 $worker = (string) $worker;
+$nume = (string) $nume;
 
 $valPRODUS = $price * $amount;
 $data_bon = date('Y/m/d h:i:s',time());

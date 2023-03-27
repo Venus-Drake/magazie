@@ -2,6 +2,8 @@
 
 global $cantitate; global $codSAP; global $produs; global $furnizor; global $magazie; global $grupa;
 
+echo __FILE__.' been requested in: '.$_SERVER['SCRIPT_FILENAME'];
+
 echo '
 <HEAD>
     <link rel="stylesheet" href="/ramira/magazie/comenzi/styling.css">

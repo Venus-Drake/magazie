@@ -41,23 +41,17 @@
 														$telFUR = $_POST['telefon'];
 														$mailFUR = $_POST['email'];
 														$depFUR = ucwords(strtolower($_POST['departament']));
-														require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-														$chk = "SELECT `furnizor` FROM `furnizori_materiale` WHERE `furnizor` LIKE '$chkFUR%'";
-														if($chkRUN = mysql_query($chk))
+														require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+														if(!$chk = $connect -> query("SELECT `furnizor` FROM `furnizori_materiale` WHERE `furnizor` LIKE '$chkFUR%'"))
+														{die(__LINE__ . '. MySQL error in ' . __FILE__ . ': ' . mysqli_error($connect));}
+														if(mysqli_num_rows($chk) > 0) echo 'Furnizor already registered.';
+														else
 														{
-														    if(mysql_num_rows($chkRUN) > 0) echo 'Furnizor already registered.';
-														    else
-														    {
-															    $que = "INSERT INTO `furnizori_materiale` VALUES('','$numeFUR','$judFUR','$locFUR','$strFUR','$nrstrFUR','$cpFUR','$taraFUR','$mailFUR','$telFUR','$persFUR','$depFUR','$apelFUR','$codFUR')";
-															    if($run = mysql_query($que))
-															    {
-																    if(mysql_affected_rows() > 0) echo 'OK^';
-																    else echo __LINE__.'. MySQL error in '.__FILE__.': Nici un furnizor nu a fost inserat. Va rog verificati datele introduse!';
-															    }
-                                                                else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
-														    }
+															if(!$que = $connect -> query("INSERT INTO `furnizori_materiale` VALUES('','$numeFUR','$judFUR','$locFUR','$strFUR','$nrstrFUR','$cpFUR','$taraFUR','$mailFUR','$telFUR','$persFUR','$depFUR','$apelFUR','$codFUR')"))
+															{die(__LINE__ . '. MySQL error in ' . __FILE__ . ': ' . mysqli_error($connect));}
+															if(mysqli_affected_rows($connect) > 0) echo 'OK^';
+															else echo __LINE__.'. MySQL error in '.__FILE__.': Nici un furnizor nu a fost inserat. Va rog verificati datele introduse!';
 														}
-                                                        else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
 													}
 													else echo 'Departament missing';
 												}
@@ -86,44 +80,38 @@
 	else if(isset($_POST['numeFURNIZORset']) && !empty($_POST['numeFURNIZORset']))
     {
 		$furnizor = $_POST['numeFURNIZORset'];
-		require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
-		$chk = "SELECT `furnizor` FROM `furnizori_materiale` WHERE `furnizor` = '$furnizor'";
-		if($chkRUN = mysql_query($chk))
+		require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
+		if(!$chk = $connect -> query("SELECT `furnizor` FROM `furnizori_materiale` WHERE `furnizor` = '$furnizor'"))
+		{die(__LINE__ . '. MySQL error in ' . __FILE__ . ': ' . mysqli_error($connect));}
+		if(mysqli_num_rows($chk) > 0)echo 'Furnizor already registered';
+		else
 		{
-		    if(mysql_num_rows($chkRUN) > 0)echo 'Furnizor already registered';
-		    else
-		    {
-			    $grab = "SELECT `cod.FURNIZOR` FROM `furnizori_materiale` ORDER BY `cod.FURNIZOR` DESC";
-			    if($grabRUN = mysql_query($grab))
-			    {
-				    if(mysql_num_rows($grabRUN) > 0)
-				    {
-					    $grabROW = mysql_fetch_assoc($grabRUN);
-					    $codFUR = $grabROW['cod.FURNIZOR'];
-					    if($codFUR == '')$codFUR = 'F0001';
-					    else 
+			if(!$grab = $connect -> query("SELECT `cod.FURNIZOR` FROM `furnizori_materiale` ORDER BY `cod.FURNIZOR` DESC"))
+			{die(__LINE__ . '. MySQL error in ' . __FILE__ . ': ' . mysqli_error($connect));}
+			if(mysqli_num_rows($grab) > 0)
+			{
+				$grabROW = $grab -> fetch_assoc();
+				$codFUR = $grabROW['cod.FURNIZOR'];
+				if($codFUR == '')$codFUR = 'F0001';
+				else 
+				{
+					$codLENGTH = strlen($codFUR);
+					$trimmed = substr($codFUR,1,($codLENGTH - 1));
+					$codFUR = (int)$trimmed + 1;
+					$codFUR = 'F'.$codFUR;
+					$newLENGTH = strlen($codFUR);
+					if($newLENGTH < $codLENGTH)
+					{
+						$dif = $codLENGTH - $newLENGTH;
+						for($i = 0; $i < $dif; $i++)
 						{
-							$codLENGTH = strlen($codFUR);
-							$trimmed = substr($codFUR,1,($codLENGTH - 1));
-							$codFUR = (int)$trimmed + 1;
-							$codFUR = 'F'.$codFUR;
-							$newLENGTH = strlen($codFUR);
-							if($newLENGTH < $codLENGTH)
-							{
-							    $dif = $codLENGTH - $newLENGTH;
-								for($i = 0; $i < $dif; $i++)
-								{
-								    $codFUR = substr_replace($codFUR,'0',1,0);
-								}
-							}
+							$codFUR = substr_replace($codFUR,'0',1,0);
 						}
-					    echo 'OK^'.$codFUR;
-				    }
-			    }
-			    else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
-		    }
+					}
+				}
+				echo 'OK^'.$codFUR;
+			}
 		}
-		else echo __LINE__.'. MySQL error in '.__FILE__.': '.mysql_error();
     }
 
 ?>

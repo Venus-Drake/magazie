@@ -10,7 +10,17 @@
 			document.getElementById("imprumutprod").disabled = true;
 			document.getElementById("stornoprod").disabled = true;
 			document.getElementById("receptie").disabled = true;
-			document.getElementById("rapoarte").disabled = true;
+			document.getElementById("rapoarteProductie").disabled = true;
+			document.getElementById("status").disabled = true;
+			document.getElementById("comenziStatus").disabled = true;
+			document.getElementById("extras").disabled = true;
+		}
+		function productionManagerBUTTONS(){
+			document.getElementById("rapoarteProductie").disabled = false;
+			document.getElementById("eliberareprod").disabled = true;
+			document.getElementById("imprumutprod").disabled = true;
+			document.getElementById("stornoprod").disabled = true;
+			document.getElementById("receptie").disabled = true;
 			document.getElementById("status").disabled = true;
 			document.getElementById("comenziStatus").disabled = true;
 			document.getElementById("extras").disabled = true;
@@ -38,9 +48,9 @@
 			<button ID="receptie" CLASS="receptie" STYLE="MARGIN-LEFT: .23VW;"
 				onclick="location.href='/ramira/magazie/receptie%20marfa/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'"
 				target="_self"><B>Receptie Marfa</button>
-			<DIV><button CLASS="rapoarte" STYLE="MARGIN-LEFT: .23VW;"
-					onclick="location.href='/ramira/magazie/rapoarte/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'"
-					target="_self"><B>Rapoarte</button>
+			<DIV><button ID = "rapoarteProductie" CLASS="rapoarte" STYLE="MARGIN-LEFT: .23VW;"
+					onclick="location.href='/ramira/magazie/rapoarte/rapoarteproductie/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'"
+					target="_self"><B>Rapoarte Productie</button>
 				<DIV ID="alertaRAPOARTE"
 					STYLE="BORDER-RADIUS: 20px; BACKGROUND-COLOR: BLUE; HEIGHT: 1vw; WIDTH: 1vw; POSITION: ABSOLUTE; MARGIN-TOP: 0; FLOAT: RIGHT; MARGIN-LEFT: 4.6vw; BORDER: 2px SOLID BLACK; DISPLAY: NONE;">
 				</DIV>
@@ -55,7 +65,7 @@
 					STYLE="BORDER-RADIUS: 20px; BACKGROUND-COLOR: RED; HEIGHT: .8vw; WIDTH: .8vw; POSITION: ABSOLUTE; MARGIN-TOP: 0; FLOAT: RIGHT; MARGIN-LEFT: 4.6vw; BORDER: 1px SOLID WHITE; DISPLAY: NONE;">
 				</DIV>
 			</DIV>
-			<button CLASS="extras" STYLE="MARGIN-LEFT: .23VW;"
+			<button ID = "extras" CLASS="extras" STYLE="MARGIN-LEFT: .23VW;"
 				onclick="location.href='/ramira/magazie/extras/main.php?nume=<?php echo $nume.'&userid='.$user; ?>'"
 				target="_self"><B>Extras</button>
 		</DIV>
@@ -65,14 +75,14 @@
 				STYLE="COLOR: RGBA(237,28,36)); FLOAT: LEFT; TEXT-ALIGN: CENTER; MARGIN-TOP: .25VW; WIDTH: 80%; TEXT-TRANSFORM: NONE;">
 				<b>Bine ai venit,<BR><SPAN ID="numeGESTIONAR">
 						<?php if($nume)echo $nume; else echo 'Unknown user'; ?>
-					</SPAN>!
+					</SPAN>!<SPAN ID = "marcaUSER" STYLE = "DISPLAY: NONE;"><?php echo $user; ?></SPAN>
 			</DIV>
 			<DIV>
 				<?php 
 					if($nume)
              	    {
 	                global $user;
-		   	   		    require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+		   	   		    require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 		       			if(!$gengrab = $connect -> query("SELECT `gender` FROM `utilizatori` WHERE `username` = '$user'"))
 						{
 							$filelist = explode(DIRECTORY_SEPARATOR,__FILE__);
@@ -112,7 +122,7 @@
 	</NAV>
 	<BR><BR><BR>
 	<?php
-	        require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/connect.inc.php';
+	        require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
 	        if(!$accLVL = $connect -> query("SELECT `nivel_ACCES` FROM `utilizatori` WHERE `username` = '$user'"))
 			{
 				$filelist = explode(DIRECTORY_SEPARATOR,__FILE__);
@@ -128,10 +138,8 @@
 			{
 				$accLVLrow = $accLVL -> fetch_assoc();
 				$acces = $accLVLrow['nivel_ACCES'];
-				if($acces == "GUEST")
-				{
-					echo '<SCRIPT>disableBUTTONS()</SCRIPT>';
-				}
+				if($acces == "GUEST") echo '<SCRIPT>disableBUTTONS()</SCRIPT>';
+				else if($acces == "MANAPROD") echo '<SCRIPT>productionManagerBUTTONS()</SCRIPT>';
 				else echo '<SCRIPT>
 								document.getElementsByClassName("eliberareprod").disabled = false;
 								document.getElementsByClassName("imprumutprod").disabled = false;
