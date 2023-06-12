@@ -8,7 +8,12 @@
         BODY
         {
 		    ANIMATION: ALL NONE;
-		    BACKGROUND-COLOR: WHITE; OPACITY: 1;
+		    BACKGROUND-COLOR: BLACK; OPACITY: 1;
+            BACKGROUND-IMAGE: URL("/ramira/magazie/images/Working.gif");
+            BACKGROUND-REPEAT: no-repeat;
+            background-position: center;
+            COLOR: WHITE;
+            FONT-WEIGHT: BOLD;
         }
     </STYLE>
 </HEAD>
@@ -16,31 +21,39 @@
 <BODY ID = "bon_magazie_rs">
 
 	<?php
+        require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
 
-    global $amount;
-    global $proc;
-    global $unit;
-
-	require $_SERVER['DOCUMENT_ROOT'].'/ramira/magazie/header.php';
-
-    $seria = 'RAMIRA S.A. - Productie';
-	if(isset($_GET['nume']) && !empty($_GET['nume'])) $nume = $_GET['nume'];
-	else $nume = "Unknown User";
-    require_once $_SERVER['DOCUMENT_ROOT'].'/ramira/spout-3.3.0/src/Spout/Autoloader/autoload.php';
-
+        $seria = 'Incarcare comenzi '.$datetime;
+        require_once($_SERVER['DOCUMENT_ROOT'].'/ramira/PHPExcel-develop/Classes/PHPExcel.php');
+        convertXLStoCSV('OrdersReport.xls','OrdersReport.csv');
+        
+        function convertXLStoCSV($infile,$outfile)
+        {
+            $fileType = PHPExcel_IOFactory::identify($infile);
+            $objReader = PHPExcel_IOFactory::createReader($fileType);
+        
+            $objReader->setReadDataOnly(true);   
+            $objReader->setLoadSheetsOnly('Detail');
+            $objPHPExcel = $objReader->load($infile);  
+        
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
+            $objWriter->save($outfile);
+        }
+        //die('DONE');
+        require_once $_SERVER['DOCUMENT_ROOT'].'/ramira/spout-3.3.0/src/Spout/Autoloader/autoload.php';
 	?>
 
-    <DIV STYLE = "WIDTH: 100%; MARGIN: 20px AUTO; BACKGROUND-COLOR: WHITE;">
-        <DIV STYLE = "WIDTH: 99%; FLOAT: NONE; MARGIN: 0 AUTO; HEIGHT: 70vh; OVERFLOW: AUTO;">
-  		    <IMG SRC = "../logo.jpg" STYLE = "WIDTH: 18vw; HEIGHT:4.5vw; MARGIN-TOP: 1.3vw; MARGIN-RIGHT: 1.3vw; MARGIN-BOTTOM: 1.3vw;">
-        	<B><CENTER><FONT STYLE = "FONT-SIZE: 2.5vw">RAPORT PRODUCTIE</FONT><BR>Sectia: <SPAN ID = "sectieRaport"><?php echo $seria;?></SPAN></CENTER><BR><BR><BR>
+    <DIV STYLE = "WIDTH: 100%; MARGIN: 20px AUTO; BACKGROUND-COLOR: RGBA(0,0,0,0);">
+        <DIV STYLE = "WIDTH: 99%; FLOAT: NONE; MARGIN: 0 AUTO; HEIGHT: 99%; OVERFLOW: AUTO;">
+        	<B><CENTER><FONT STYLE = "FONT-SIZE: 2.5vw"><BR><BR>INCARCARE COMENZI - <?php echo $datetime;?></FONT></SPAN></CENTER><BR><BR><BR>
+            <DIV ID = "loadingTEXT" STYLE = "WIDTH: 100%; MARGIN-TOP: 20%; FONT-SIZE: 2.5vw; FONT-WEIGHT: BOLD; TEXT-ALIGN: CENTER;"></DIV>
             <?php
                 //$readData = file('Report Test.ods');
                 use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
 
-                $reader = ReaderEntityFactory::createReaderFromFile('Report Test.ods');
+                $reader = ReaderEntityFactory::createReaderFromFile('OrdersReport.csv');
 
-                $reader->open('Report Test.ods');
+                $reader->open('OrdersReport.csv');
 
                 foreach ($reader->getSheetIterator() as $sheet) {
                     if($sheet->getIndex() == 0) $rowCount = 0;
@@ -59,47 +72,46 @@
                             $PO = $value[8];
                             $machGROUP = $value[13];
                             require $_SERVER['DOCUMENT_ROOT'].'/ramira/connect.inc.php';
-                            if(!$searchDB = $connect -> query("SELECT `productionJOB` FROM `production.queue` WHERE `productionJOB` = '$PJ' AND `productionORDER` = '$PO' AND `machineGROUP` = '$machGROUP'")) echo __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect);
+                            if(!$searchDB = $connect -> query("SELECT `productionJOB`, `piecesDONE`, `operationSTATUS`, `executedTIME`, `importance` FROM `production.queue` WHERE `productionJOB` = '$PJ' AND `productionORDER` = '$PO' AND `POoperation` = '$value[12]' AND `machineGROUP` = '$machGROUP'")) 
+                            {
+                                echo __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect);
+                                mysqli_close($connect);
+                            }
                             else
                             {
                                 if(mysqli_num_rows($searchDB) == 0)
                                 {
                                     if(!$addTOdb = $connect -> query("INSERT INTO `production.queue` VALUES('','$datetime','$datetime','$value[0]','$value[8]','$value[12]','$value[19]','$value[20]','Released','$value[16]','$executedTime','$value[14]','$requiredDate','$value[13]','','','')")) echo __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect);
-                                    //else echo ' - OK!<BR>';
+                                    else echo '<SCRIPT>LoadOrdersText("Inserted new Production Job: '.$PJ.' (PO: '.$PO.') for '.$machGROUP.'");</SCRIPT>';
+                                }
+                                else
+                                {
+                                    $DbRow = $searchDB -> fetch_assoc();
+                                    $doneParts = $DbRow['piecesDONE'];
+                                    $status = $DbRow['operationSTATUS'];
+                                    $doneTime = $DbRow['executedTIME'];
+                                    $importance = $DbRow['importance'];
+                                    if($doneParts != $value[20] || $status != 'Released' || $doneTime != $executedTime || $importance != $value[14])
+                                    {
+                                        if($doneParts < $value[20]) $doneParts = $value[20];
+                                        if($doneTime < $executedTime) $doneTime = $executedTime;
+                                        if($importance != $value[14]) $importance = $value[14];
+                                        if(!$UpdateOrder = $connect -> query("UPDATE `production.queue` SET `lastUPDATED` = '$datetime', `piecesDONE` = '$doneParts', `operationSTATUS` = '$status', `executedTIME` = '$doneTime', `importance` = '$importance' WHERE `productionJOB` = '$PJ' AND `productionORDER` = '$PO' AND `POoperation` = '$value[12]' AND `machineGROUP` = '$machGROUP'")) echo __LINE__.'. MySQL error in '.__FILE__.': '.mysqli_error($connect);
+                                        else echo '<SCRIPT>LoadOrdersText("Updated Production Job: '.$PJ.' (PO: '.$PO.') for '.$machGROUP.'");</SCRIPT>';
+                                    }
                                 }
                             }
                         }
                         $rowCount++;
+                        echo '<SCRIPT>LoadOrdersText("Loaded '.$rowCount.' lines");</SCRIPT>';
                     }
                 }
-
+                echo '<SCRIPT>LoadOrdersText("Done loading '.$rowCount.' lines");</SCRIPT>';
                 $reader->close();
             ?>
 			
         </DIV>
-		<DIV STYLE = "POSITION: FIXED; BOTTOM : 0; MARGIN: 0 AUTO; ALIGN-ITEMS: CENTER; WIDTH: 100%;">
-            <DIV STYLE = "MARGIN: 0 AUTO; TEXT-ALIGN: CENTER; WIDTH: 50%">
-                <B>DATA<BR><SPAN STYLE = "BORDER-BOTTOM: 1px DOTTED BLACK; MIN-WIDTH: 20VW; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"><?php echo $date;?></SPAN><BR>
-                <?php if($proc == 0) echo '<BUTTON CLASS = "CONFIRM" ID = "CONFIRM" ONCLICK = "confirmare()">EXPORTA</BUTTON>';
-                      else echo '<BUTTON CLASS = "CONFIRM" ID = "CONFIRM" STYLE = "BACKGROUND-COLOR: LIGHTGREEN;">CONFIRMARE ANGAJAT</BUTTON>';?>
-	        </DIV>
-	        <DIV STYLE = "MARGIN: 0 AUTO; TEXT-ALIGN: CENTER; WIDTH: 50%; FONT-SIZE: 1.5VW">
-                <B>SEMNATURA GESTIONAR<BR><SPAN ID = "semnaturaGESTIONAR" STYLE = "BORDER-BOTTOM: 1px DOTTED BLACK; MIN-WIDTH: 20VW; DISPLAY: INLINE-BLOCK; TEXT-ALIGN: CENTER;"><SCRIPT>inserareGESTIONAR();</SCRIPT></SPAN><BR>
-                <?php if($proc == 0) echo '<BUTTON CLASS = "PRINT" ID = "PRINTER" ONCLICK = "close_print()">PRINTEAZA</BUTTON>';
-                      else echo '<BUTTON CLASS = "PRINT" ID = "PRINTER" ONCLICK = "close_print()" STYLE = "BACKGROUND-COLOR: #ff3300">PRINTEAZA/FINALIZEAZA</BUTTON>';?>
-	        </DIV>
-	        <DIV STYLE = "MARGIN: 0 AUTO; TEXT-ALIGN: CENTER; WIDTH: 100%;" ID = "FOOT_NOTE">
-	        <FONT STYLE = "FONT-SIZE: 1.2VW"><BR><CENTER>AICI O FI CEVA SCRIS SAU NU...VEDEM...</FONT>
-	        </DIV>
-        </DIV>
-    </DIV>
-    <DIV ID = "confModal" class="confModal"><BR><BR><BR><BR><BR>
-	    <DIV ONLOAD = "loadFOCUS();" class = "modal-content" STYLE = "background-color: gray; font-weight: bold; HEIGHT: 100px; MARGIN-TOP: 300px; MARGIN-LEFT: 110px;">
-            <span ID = "c_close" CLASS = "close">&#x2623;</span>
-                <INPUT TYPE = "password" ID = "worker_confirm" ONCHANGE = "salveaza_comanda()" AUTOSUGEST = "OFF" TITLE = ></INPUT>
-			    <CENTER><BUTTON ID = "c_setoff" CLASS = "setoff"><B>Anuleaza</BUTTON>
-            </DIV>
-		<BR><BR>
+		
     </DIV>
     <SCRIPT src="/ramira/magazie/rapoarte/rapoarteproductie/scripts.js"></SCRIPT>
 </BODY>

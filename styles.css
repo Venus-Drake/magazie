@@ -162,6 +162,19 @@ IFRAME
   Z-INDEX: -1;
   FLOAT: NONE;
 }
+.AfisareComanda
+{
+    BACKGROUND-COLOR: #FEFEFE;
+    MARGIN: 0 AUTO;
+    PADDING: 20px;
+    BORDER: 1px SOLID #888;
+    BORDER-RADIUS: 20px;
+    WIDTH: 30%;
+    HEIGHT: AUTO;
+    FONT-SIZE: 2.3vw;
+    Z-INDEX: -1;
+    FLOAT: NONE;
+}
 table tr:not(:first-child)
 {
     cursor: pointer; transition: all .15s ease-in-out;
